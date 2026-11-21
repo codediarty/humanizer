@@ -26,7 +26,7 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261121c"
+VER = "20261121d"
 TODAY = "2026-11-21"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -306,10 +306,11 @@ def demo_card():
             '<div class="dm to good wait"><small>휴머나이징 후 · AI작성률</small><b>– <em>대기</em></b><div class="dm-bar"><i style="width:0"></i></div></div></div>'
             '<div class="demo-legend"><span class="a"><i></i>AI 패턴 검출 문장</span><span class="h"><i></i>AI 패턴을 지운 곳</span><span class="demo-state" aria-live="polite"></span></div>'
             '<div class="demo-doc">%s</div>'
-            '<div class="demo-ft"><button class="btn btn-p btn-s" type="button" data-demo-run data-run="%s휴머나이징 보기" data-again="%s처음부터 다시">%s휴머나이징 보기</button>'
-            '<a class="btn btn-g btn-s" href="#tool" data-tool>내 글로 해 보기</a><span class="note">%s</span></div></div>') % (
+            # 2026.11.21 밤 대표: '휴머나이징 보기 · 처음부터 다시'(예시 재생) 대신 실제 흐름으로: 휴머나이징 하기(내 글 인간화) → 이 글 맞춤 충전 → 결제 후 이어서
+            '<div class="demo-ft"><a class="btn btn-p btn-s demo-go" href="#tool" data-hum-go>%s<span>휴머나이징 하기</span><em>내 글 인간화</em></a>'
+            '<a class="btn btn-g btn-s" href="#tool" data-tool>무료 검사</a><span class="note">%s</span></div></div>') % (
         ico("file"), esc(first["file"]), tabs, first["before"]["rate"], first["before"]["band"], first["before"]["rate"], ico("arrow"),
-        first["doc"], esc(ico("sparkle")), esc(ico("refresh")), ico("sparkle"), esc(DEMO["measured"]))
+        first["doc"], ico("sparkle"), esc(DEMO["measured"]))
 
 
 def compare_block():
@@ -353,15 +354,15 @@ def crumbs_html(trail):
 def hero_with_tool(eyebrow, h1, lead, pts=None, cls="hero"):
     """2026.11.21 밤(대표: '좌측은 너무 길어서 잘리고 우측은 공간이 남아'): 첫 화면은 왼쪽 글 + 오른쪽 예시를 같은 높이로 맞추고,
     검사 도구는 그 바로 아래 넓은 칸으로(id="tool" 그대로라 '무료 검사' 단추 · 모바일 고정 단추가 그대로 씀). 모바일은 글 → 도구 → 예시"""
-    pts = pts or ["한국어 전용 엔진", "문장 단위 AI 작성률", "한글 · 워드 · PDF 그대로", "글은 저장하지 않음"]
+    pts = pts or ["한국어 전용 엔진", "문장 단위 AI 작성률", "한글 · 워드 · PDF 그대로", "파일 암호화 보호 · 작업 후 자동 삭제"]
     return ('<section class="%s" id="top"><div class="wrap"><div class="hero-grid hg2">'
-            '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-safe"><b>%s</b>파일 암호화 보호 · 작업 후 자동 삭제</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
+            '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-2"><b>%s</b>AI 작성률 낮추기</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
             '<div class="hero-cta"><a class="btn btn-p btn-l" href="#tool" data-tool>%s무료로 AI 작성률 검사</a><a class="btn btn-g btn-l" href="/pricing/">요금 보기</a></div>'
             '<ul class="hero-pts">%s</ul></div>'
             '<div id="tool" class="tool-w hero-tool">%s</div>'
             '<div class="hero-demo">%s</div>'
             '</div></div></section>') % (
-        cls, eyebrow, ico("lock"), h1, lead, ico("search"), "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
+        cls, eyebrow, ico("trend_down"), h1, lead, ico("search"), "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
 
 
 # ---------------- 홈 ----------------

@@ -165,8 +165,10 @@
       btnP.hidden = false;
     } else if (S.pass) { if (cl) cl.textContent = stale ? '다시 검사' : 'AI 작성률 검사'; if (tc) { tc.hidden = false; tc.textContent = '이용권'; } if (tp) tp.textContent = '이용권'; btnP.hidden = false; }
     else { if (cl) cl.textContent = stale ? '바뀐 글 다시 검사' : 'AI 작성률 무료 검사'; if (tc) tc.hidden = true; btnP.hidden = true; }
+    if (S.humWant && !S.pass) { btnP.hidden = false; if (tp) { var Pw = t.replace(/\s+/g, '') ? chunk(t).parts : []; tp.textContent = Pw.length ? tk(humCost(Pw)) + '토큰' : ''; } }   // 2026.11.21 첫 화면 '휴머나이징 하기'
   }
   ta.addEventListener('input', function () { count(); if (S.src && cur() !== S.src.text) S.src.edited = true; });
+  ta.addEventListener('input', function () { if (out.querySelector('.hz20-need') && cur().replace(/\s+/g, '')) out.innerHTML = ''; });   // 2026.11.21 글을 넣기 시작하면 '먼저 넣어 주세요' 안내는 걷음
 
   /* ---------- 12.1 진행 단계 · 넣은 글 접기 ---------- */
   function setStep(n, all) {
@@ -1147,7 +1149,22 @@
       (S.res ? '<div class="hz7-acts"><button class="btn btn-g" type="button" data-act="backres">검사 결과로 돌아가기</button></div>' : '') + '</div>';
     toOut();
   }
-  btnP.addEventListener('click', function () { hum(); });
+  btnP.addEventListener('click', function () { if (S.humWant) startHum(); else hum(); });   // 2026.11.21 '휴머나이징 하기'로 들어오면 무료 맛보기 없이 바로 글 전체(토큰 없으면 이 글 맞춤 충전 창)
+  /* 2026.11.21 첫 화면 예시 '휴머나이징 하기(내 글 인간화)': 넣은 글이 있으면 바로 글 전체 휴머나이징(토큰이 없으면 이 글에 맞춘 충전 창, 결제하고 오면 이어서),
+     글이 없으면 넣는 곳으로 내려가 안내하고 '휴머나이징' 단추를 꺼내 둠(글을 넣고 누르면 같은 흐름) */
+  document.addEventListener('click', function (e) {
+    var g = e.target.closest && e.target.closest('[data-hum-go]'); if (!g) return;
+    e.preventDefault();
+    S.humWant = true; tags();
+    var tw = document.getElementById('tool') || box;
+    try { tw.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'start' }); } catch (x) { /* 그대로 */ }
+    if (cur().replace(/\s+/g, '')) { startHum(); return; }
+    need('');
+    var nb = out.querySelector('.hz20-need b'), ns = out.querySelector('.hz20-need span');
+    if (nb) nb.textContent = '휴머나이징할 글을 먼저 넣어 주세요';
+    if (ns) ns.textContent = '한글, 워드, PDF 파일을 올리거나 글을 붙여 넣은 뒤 휴머나이징을 누르세요. 결제하면 바로 이어서 다듬습니다.';
+    stat('휴머나이징할 글을 먼저 넣어 주세요');
+  });
   function tokens(s) { return String(s).match(/\s+|[^\s]+/g) || []; }
   function diff(a, b) {
     var A = tokens(a), B = tokens(b), n = A.length, m = B.length, ops = [];
