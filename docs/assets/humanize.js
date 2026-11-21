@@ -49,6 +49,7 @@
   /* 판정 기준 AMJ-1.6(서버 detect.js와 같은 숫자 · 같은 문장 틀). 여러 조각(6,000자씩)을 합칠 때만 사이트에서 다시 계산 */
   var J = { HI: 85, MID: 65, SHORT: 60, SEG_AI: 20, UNFIT_RATE: 40, RISK_RATE: 20, UNFIT_SEG: 50,
     B: { unfit: ['부적합', '부적합 · 개선 필요'], risk: ['고위험', '고위험 · 수정 권고'], safe: ['안전', '안전 · AI 패턴 적음'], short: ['판단 보류', '판단 보류 · 글이 짧음'] } };
+  var SHOW_LIST = false;   // 2026.11.21 밤 대표: 사이트(충전 창 포함)에는 정가 · 50% 표시를 하지 않음(아임웹 상품 쪽 표시는 그대로)
   var PRODS = [   // 13.17(10.31) 새 요금(대표): 라이트 · 플러스 · 프로(BEST 추천, 기본) · 맥스(최고 혜택) = 아임웹 96 · 97 · 98 · 99(build.py CREDITS 와 같게. 서버 products 는 결제 페이지 주소만 가져옴)
     { id: 'lt', name: '라이트', price: 9900, list: 19800, cr: 100, base: 100, per: '99원', who: '간단한 문장 수정', doc: '레포트', pg: 5 },
     { id: 'pl', name: '플러스', price: 19900, list: 39800, cr: 300, base: 300, per: '약 66원', who: '일반적인 문서 작업', doc: '레포트', pg: 15 },
@@ -1328,7 +1329,7 @@
       return '<label' + (best ? ' class="best"' : p.top ? ' class="top"' : '') + '><input type="radio" name="product" value="' + esc(p.id) + '"' + (p.id === sel ? ' checked' : '') + '><span>' +
         (best ? '<i class="tg">' + esc(p.badge || '추천') + '</i>' : p.top ? '<i class="tg top">' + esc(p.badge || '최고 혜택') + '</i>' : '') +
         '<b class="nm">' + esc(p.name) + '</b><b class="tk">' + tk(p.cr) + '<small>토큰</small>' + (p.bonus ? '<i class="bn">+' + tk(p.bonus) + '</i>' : '') + '</b>' +
-        (p.list ? '<i class="hz-lp"><s>정가 ' + n2(p.list) + '원</s><b>50%</b></i>' : '') + (p.price ? '<b class="pr">' + n2(p.price) + '원' + (p.per ? '<small>토큰당 ' + esc(p.per) + '</small>' : '') + '</b>' : '') +
+        (p.list && SHOW_LIST ? '<i class="hz-lp"><s>정가 ' + n2(p.list) + '원</s><b>50%</b></i>' : '') + (p.price ? '<b class="pr">' + n2(p.price) + '원' + (p.per ? '<small>토큰당 ' + esc(p.per) + '</small>' : '') + '</b>' : '') +
         (p.save ? '<i class="hz17-sv">플러스보다 토큰당 약 ' + p.save + '% 절약</i>' : '') +
         '<small class="ds">' + esc(sm) + '</small></span></label>';
     }).join('') + (need > 0 ? '' : '<p class="hz20-pg">페이지 수는 1페이지 약 ' + n2(PG_CHARS) + '자 기준</p>');

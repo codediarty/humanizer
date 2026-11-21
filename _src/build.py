@@ -26,7 +26,7 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261121d"
+VER = "20261121e"
 TODAY = "2026-11-21"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -41,10 +41,10 @@ BIZ = {"name": "성균관컨설팅", "ceo": "이채연", "no": "272-32-01885", "
 # list = 정가(판매가의 2배, 대표 지시 2026.11.21: 가격 · 토큰 정책은 AIMarker 와 같게, 정가를 2배로 적어 50% 할인으로 보이게)
 # pg = 검사와 휴머나이징 약 몇 페이지(AIMarker 대표가 정한 값과 같게: 도구 충전 창 humanize.js PRODS 와 맞춤)
 PACKS = [
-    {"id": "lt", "name": "라이트", "tok": 100, "price": 9900, "list": 19800, "per": "99원", "who": "자기소개서 · 짧은 과제", "chars": "약 8,000자", "pg": "약 5페이지"},
-    {"id": "pl", "name": "플러스", "tok": 300, "price": 19900, "list": 39800, "per": "약 66원", "who": "레포트 · 과제 여러 편", "chars": "약 25,000자", "pg": "약 15페이지"},
-    {"id": "pr", "name": "프로", "tok": 750, "price": 39900, "list": 79800, "per": "약 53원", "who": "논문 · 학위논문", "chars": "약 62,000자", "pg": "약 40페이지", "best": "BEST 추천", "save": "플러스보다 토큰당 20% 절약"},
-    {"id": "mx", "name": "맥스", "tok": 1500, "price": 69900, "list": 139800, "per": "약 47원", "who": "논문 전체 · 여러 편", "chars": "약 125,000자", "pg": "약 100페이지", "top": "최고 혜택", "save": "플러스보다 토큰당 30% 절약"},
+    {"id": "lt", "name": "라이트", "tok": 100, "price": 9900, "list": 19800, "per": "99원", "who": "자기소개서 · 짧은 과제", "chars": "약 8,000자", "pg": "약 5페이지", "sub": "간단한 문장 수정", "doc": "레포트"},
+    {"id": "pl", "name": "플러스", "tok": 300, "price": 19900, "list": 39800, "per": "약 66원", "who": "레포트 · 과제 여러 편", "chars": "약 25,000자", "pg": "약 15페이지", "sub": "일반적인 문서 작업", "doc": "레포트"},
+    {"id": "pr", "name": "프로", "tok": 750, "price": 39900, "list": 79800, "per": "약 53원", "who": "논문 · 학위논문", "chars": "약 62,000자", "pg": "약 40페이지", "best": "BEST 추천", "save": "플러스보다 토큰당 약 20% 절약", "sub": "넉넉한 토큰, 더 높은 가성비", "doc": "논문"},
+    {"id": "mx", "name": "맥스", "tok": 1500, "price": 69900, "list": 139800, "per": "약 47원", "who": "논문 전체 · 여러 편", "chars": "약 125,000자", "pg": "약 100페이지", "top": "최고 혜택", "save": "플러스보다 토큰당 약 30% 절약", "sub": "최대 토큰 제공", "doc": "논문"},
 ]
 
 
@@ -70,8 +70,12 @@ def shop(pid):
 LOGO_SVG = ('<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#0b1730"/>'
             '<path d="M16.6 9h6.8M11 14.8h18" stroke="#fff" stroke-width="3" stroke-linecap="round"/>'
             '<circle cx="20" cy="24.6" r="6.3" fill="none" stroke="#10b981" stroke-width="3.4"/></svg>')
-LOGO = ('<a class="logo" href="/" aria-label="%s 홈">%s<span class="lw"><b>%s</b><span class="en" aria-hidden="true">%s</span></span></a>'
-        % (BRAND, LOGO_SVG, BRAND, "".join("<i>%s</i>" % ch for ch in "HUMANIZER")))
+LOGO_ㅎ = ('<a class="logo" href="/" aria-label="%s 홈">%s<span class="lw"><b>%s</b><span class="en" aria-hidden="true">%s</span></span></a>'
+          % (BRAND, LOGO_SVG, BRAND, "".join("<i>%s</i>" % ch for ch in "HUMANIZER")))
+# 2026.11.21 밤 21:21 대표: '로고는 이걸로, 로봇 캐릭터'(준 그림 _src/brand/robot.png → make_brand.py → docs/assets/img/logo-robot.png). 'ㅎ' 표지는 LOGO_ㅎ 로 남겨 둠
+LOGO = ('<a class="logo" href="/" aria-label="%s 홈"><img class="logo-img" src="/assets/img/logo-robot.png" width="45" height="48" alt="" decoding="async">'
+        '<span class="lw"><b>%s</b><span class="en" aria-hidden="true">%s</span></span></a>'
+        % (BRAND, BRAND, "".join("<i>%s</i>" % ch for ch in "HUMANIZER")))
 
 NAV = [("ai-humanizer/", "AI 휴머나이저"), ("copykiller/", "카피킬러 AI 작성률"), ("gptkiller/", "GPT킬러"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]
 
@@ -109,7 +113,7 @@ ORG = {"@type": "Organization", "@id": SITE + "/#org", "name": BRAND, "alternate
 WEBSITE = {"@type": "WebSite", "@id": SITE + "/#website", "name": BRAND, "alternateName": [BRAND_EN, "한국휴머나이저 AI 휴머나이저"], "url": SITE + "/", "inLanguage": "ko-KR", "publisher": {"@id": SITE + "/#org"}}
 APP = {"@type": "WebApplication", "@id": SITE + "/#app", "name": BRAND + " AI 휴머나이저", "url": SITE + "/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Web",
        "inLanguage": "ko-KR", "description": "한국어 AI 작성률 검사와 AI 휴머나이징. 카피킬러 · GPT킬러 같은 AI 탐지기에 걸리는 문장만 골라 사람 문장으로 바꾸고, 같은 기준으로 AI 작성률을 다시 잽니다.",
-       "featureList": ["AI 작성률 무료 검사(5만 자)", "문장 단위 AI 검출 표시", "AI 휴머나이징(한국어 전용 엔진)", "한글 HWP · HWPX · 워드 DOCX · PDF 파일 지원", "말투 자동 맞춤", "결과상세내역서 PDF"],
+       "featureList": ["AI 작성률 무료 검사(5만 자)", "문장 단위 AI 검출 표시", "AI 휴머나이징(한국어 전용 엔진)", "한글 HWP · HWPX · 워드 DOCX · PDF 파일 지원", "말투 자동 맞춤"],
        "offers": {"@type": "AggregateOffer", "priceCurrency": "KRW", "lowPrice": "0", "highPrice": "69900", "offerCount": "5"}, "publisher": {"@id": SITE + "/#org"}}
 
 
@@ -326,20 +330,21 @@ def faq_html(faq):
     return '<div class="faq">' + "".join('<details><summary>%s</summary><div class="a"><p>%s</p></div></details>' % (esc(q), a) for q, a in faq) + "</div>"
 
 
-def pricing_cards(cta_text="구매하기"):
+def pricing_cards(cta_text="충전하기"):
+    """2026.11.21 밤 대표: 'AIMarker 처럼 간단하지만 깔끔하게'. 정가 · 50% 표시와 기능 목록(결과상세내역서 PDF · 판정 근거)은 빼고
+    이름 · 한 줄 설명 · 토큰 · 가격(토큰당) · 절약 · '검사와 휴머나이징 서비스 약 N페이지' 한 줄 · 충전 단추만"""
     out = []
     for p in PACKS:
-        cls = "pk best" if p.get("best") else "pk"
+        cls = "pk pk2" + (" best" if p.get("best") else (" top" if p.get("top") else ""))
         tag = '<span class="tg">%s</span>' % p["best"] if p.get("best") else ('<span class="tg top">%s</span>' % p["top"] if p.get("top") else "")
-        link = shop(p["id"])
-        btn = ('<a class="btn %s" href="%s" target="_blank" rel="noopener" data-pack="%s">%s %s</a>' % ("btn-p" if p.get("best") else "btn-d", esc(link), p["id"], cta_text, ico("arrow"))) if link else \
-              ('<a class="btn %s" href="/humanize/#buy-%s">%s %s</a>' % ("btn-p" if p.get("best") else "btn-d", p["id"], cta_text, ico("arrow")))
-        feats = ["AI 작성률 검사와 휴머나이징 " + p["chars"] + "(" + p["pg"] + ")", "모든 문장 AI 표시 · 판정 근거", "결과상세내역서 PDF · 파일 그대로 받기", "남은 토큰 5년 동안 유지"]
-        lp = ('<p class="lp"><s>정가 %s</s><b>50%%</b></p>' % won(p["list"])) if p.get("list") else ""
-        out.append('<div class="%s rv">%s<h3>%s</h3><p class="who">%s</p><p class="tk">%s토큰</p>%s<p class="pr">%s</p><p class="per">토큰당 %s · 부가세 포함</p>%s<ul>%s</ul>%s</div>' % (
-            cls, tag, p["name"], p["who"], "{:,}".format(p["tok"]), lp, won(p["price"]), p["per"], ('<span class="sv">%s</span>' % p["save"]) if p.get("save") else "",
-            "".join("<li>%s%s</li>" % (ico("check"), f) for f in feats), btn))
-    return '<div class="price">' + "".join(out) + "</div>"
+        link, bcls, label = shop(p["id"]), ("btn-p" if p.get("best") else "btn-g"), "%s %s" % (p["name"], cta_text)
+        btn = ('<a class="btn %s" href="%s" target="_blank" rel="noopener" data-pack="%s">%s</a>' % (bcls, esc(link), p["id"], label)) if link else \
+              ('<a class="btn %s" href="/humanize/#buy-%s">%s</a>' % (bcls, p["id"], label))
+        sv = ('<p class="sv2">%s</p>' % p["save"]) if p.get("save") else ""
+        out.append('<div class="%s rv">%s<h3>%s</h3><p class="who">%s</p><p class="tk2"><b>%s</b>토큰</p><p class="pr2"><b>%s</b><span>토큰당 %s</span></p>%s'
+                   '<p class="use">%s 검사와 휴머나이징 서비스 <b>%s</b></p>%s</div>' % (
+                       cls, tag, p["name"], p["sub"], "{:,}".format(p["tok"]), won(p["price"]), p["per"], sv, p["doc"], p["pg"], btn))
+    return '<div class="price price2">' + "".join(out) + "</div>"
 
 
 def cta_band(h="제출 버튼을 누르기 전, 30초면 충분합니다", p="지금 가진 글의 AI 작성률부터 무료로 확인하세요. 가입도, 카드 등록도 필요 없습니다."):
@@ -379,7 +384,7 @@ def build_home():
     body += P.compare_table(ico)
     body += P.usecases_section(ico)
     body += ('<section class="sec alt" id="price"><div class="wrap"><div class="center"><p class="kick">%s요금</p><h2 class="h2">월 구독 없이, 쓴 만큼만</h2><p class="sub">한 번 충전하면 글자 수만큼만 빠지고, 남은 토큰은 5년 동안 사라지지 않습니다. 검사는 언제나 무료로 먼저 해 보세요.</p></div>%s'
-             '<p class="price-note">AI 작성률 검사 1,000자 4토큰 · AI 휴머나이징 1,000자 8토큰 · 1토큰 100원 · 결제는 운영사 성균관컨설팅 결제 페이지(가입 없이 카드 · 간편결제)</p></div></section>') % (ico("card"), pricing_cards())
+             '<p class="price-note">AI 작성률 검사 1,000자 4토큰 · AI 휴머나이징 1,000자 8토큰 · 1토큰 100원 · 부가세 포함 · 결제는 운영사 성균관컨설팅 결제 페이지(가입 없이 카드 · 간편결제)</p></div></section>') % (ico("card"), pricing_cards())
     body += '<section class="sec" id="faq"><div class="wrap-n"><div class="center"><p class="kick">%s자주 묻는 질문</p><h2 class="h2">궁금한 점, 먼저 답해 드립니다</h2></div>%s</div></section>' % (ico("chat"), faq_html(H["faq"]))
     body += cta_band()
     ld = [APP, ld_faq(H["faq"]), ld_howto("AI 작성률 낮추기(한국휴머나이저)", P.HOW_STEPS)]
@@ -395,12 +400,12 @@ def build_humanize():
 
 def build_pricing():
     trail = [("요금", "pricing/")]
-    body = ('<section class="ph"><div class="wrap">%s<h1 class="h1">AI 휴머나이징 가격 · 요금 · 토큰 충전</h1><p class="lead">지금 모든 토큰이 정가의 <b>50%%</b> 가격입니다. 월 구독 없이 한 번 충전하고 쓴 만큼만, 남은 토큰은 5년 동안 사라지지 않습니다.</p></div></section>'
-            '<section class="sec-s"><div class="wrap">%s<p class="price-note">결제는 운영사 성균관컨설팅 결제 페이지에서 가입 없이 카드 · 간편결제로 합니다. 결제하면 보통 1분 안에, 적은 이메일로 16자리 토큰 코드가 갑니다.</p></div></section>') % (crumbs_html(trail), pricing_cards())
+    body = ('<section class="ph"><div class="wrap">%s<h1 class="h1">AI 휴머나이징 가격 · 요금 · 토큰 충전</h1><p class="lead">월 구독 없이 한 번 충전하고 쓴 만큼만 씁니다. 남은 토큰은 5년 동안 사라지지 않습니다.</p></div></section>'
+            '<section class="sec-s"><div class="wrap">%s<p class="price-note">모든 가격은 부가세 포함입니다. 결제는 운영사 성균관컨설팅 결제 페이지에서 가입 없이 카드 · 간편결제로 합니다. 결제하면 보통 1분 안에, 적은 이메일로 16자리 토큰 코드가 갑니다.</p></div></section>') % (crumbs_html(trail), pricing_cards())
     body += P.pricing_detail(ico)
     body += '<section class="sec alt"><div class="wrap-n"><h2 class="h2 center">결제 · 토큰 자주 묻는 질문</h2>%s</div></section>' % faq_html(P.PRICE_FAQ)
     body += cta_band("먼저 무료로 검사해 보세요", "AI 작성률이 높게 나온 문장만 휴머나이징하면 토큰을 아낄 수 있습니다.")
-    page("pricing/", "AI 휴머나이징 가격 · 요금 · 토큰 충전 | " + BRAND + " AI 휴머나이저", "한국휴머나이저 요금. 정가의 50% 가격으로 라이트 100토큰 9,900원부터 맥스 1,500토큰 69,900원까지. 월 구독 없이 한 번 충전, AI 작성률 검사 1,000자 4토큰 · 휴머나이징 1,000자 8토큰.",
+    page("pricing/", "AI 휴머나이징 가격 · 요금 · 토큰 충전 | " + BRAND + " AI 휴머나이저", "한국휴머나이저 요금. 라이트 100토큰 9,900원부터 맥스 1,500토큰 69,900원까지. 월 구독 없이 한 번 충전, AI 작성률 검사 1,000자 4토큰 · 휴머나이징 1,000자 8토큰.",
          body, ld=[ld_offers(), ld_faq(P.PRICE_FAQ), ld_crumbs(trail)], priority="0.9")
 
 
