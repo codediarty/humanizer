@@ -77,7 +77,8 @@ LOGO = ('<a class="logo" href="/" aria-label="%s 홈"><img class="logo-img" src=
         '<span class="lw"><b>%s</b><span class="en" aria-hidden="true">%s</span></span></a>'
         % (BRAND, BRAND, "".join("<i>%s</i>" % ch for ch in "HUMANIZER")))
 
-NAV = [("ai-humanizer/", "AI 휴머나이저"), ("copykiller/", "카피킬러 AI 작성률"), ("gptkiller/", "GPT킬러"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]
+# 2026.11.21 밤 대표: 카피킬러 · GPT킬러 이름을 대놓고 쓰지 않음(상표 문제 걱정). 메뉴는 일반어로, 두 쪽은 주소 그대로 남김
+NAV = [("ai-humanizer/", "AI 휴머나이저"), ("lower-ai-rate/", "AI 작성률 낮추기"), ("ai-check/", "AI 작성률 검사"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]
 
 
 def header(path):
@@ -92,14 +93,14 @@ def header(path):
 def footer():
     cols = [
         ("서비스", [("/humanize/", "휴머나이징 도구"), ("/ai-check/", "AI 작성률 무료 검사"), ("/pricing/", "요금 · 토큰 충전"), ("/faq/", "자주 묻는 질문")]),
-        ("많이 찾는 검색", [("/copykiller/", "카피킬러 AI 작성률 낮추기"), ("/gptkiller/", "GPT킬러 낮추기"), ("/ai-humanizer/", "AI 휴머나이저"), ("/lower-ai-rate/", "AI 작성률 낮추기"), ("/ai-bypass/", "AI 탐지 우회"), ("/free/", "AI 휴머나이저 무료"), ("/humanizing/", "AI 휴머나이징이란"), ("/best-ai-humanizer/", "AI 휴머나이징 사이트 추천"), ("/ai-converter/", "AI 문장 변환기")]),
+        ("많이 찾는 검색", [("/copykiller/", "킬러 AI 작성률 낮추기"), ("/gptkiller/", "GPT 탐지 낮추기"), ("/ai-humanizer/", "AI 휴머나이저"), ("/lower-ai-rate/", "AI 작성률 낮추기"), ("/ai-bypass/", "AI 탐지 우회"), ("/free/", "AI 휴머나이저 무료"), ("/humanizing/", "AI 휴머나이징이란"), ("/best-ai-humanizer/", "AI 휴머나이징 사이트 추천"), ("/ai-converter/", "AI 문장 변환기")]),
         ("용도별", [("/thesis/", "논문 AI 작성률 낮추기"), ("/resume/", "자기소개서 AI 작성률 낮추기"), ("/natural/", "AI 글 자연스럽게 바꾸기"), ("/report/", "대학 과제 · 레포트 AI 작성률"), ("/results/", "실제 측정 결과"), ("/guide/", "휴머나이징 가이드")]),
         ("회사 · 정책", [("/about/", "회사 소개"), ("/terms/", "이용약관"), ("/privacy/", "개인정보처리방침"), ("mailto:" + BIZ["mail"], "문의 " + BIZ["mail"])]),
     ]
     c = "".join('<div><h4>%s</h4><ul>%s</ul></div>' % (h, "".join('<li><a href="%s">%s</a></li>' % (u, t) for u, t in L)) for h, L in cols)
     return ('<footer class="ft"><div class="wrap"><div class="ft-top"><div>%s<p>한국어만을 위해 만든 AI 휴머나이저.<br>AI 작성률을 검사하고, 걸리는 문장만 사람 문장으로 바꿉니다.</p></div>%s</div>'
             '<div class="ft-biz"><b>운영</b> %s · 대표 %s · 사업자등록번호 %s · 통신판매업 신고 %s<br>%s · %s<br>'
-            '카피킬러, GPT킬러 등은 각 권리자의 상표이며 한국휴머나이저는 해당 서비스와 제휴 관계가 없습니다. AI 작성률과 판정은 한국휴머나이저 판정 기준으로 계산한 값입니다.<br>© 2026 %s. All rights reserved.</div></div></footer>'
+            '다른 AI 탐지 서비스의 이름은 각 권리자의 상표이며 한국휴머나이저는 해당 서비스와 제휴 관계가 없습니다. AI 작성률과 판정은 한국휴머나이저 판정 기준으로 계산한 값입니다.<br>© 2026 %s. All rights reserved.</div></div></footer>'
             '<div class="mcta" id="mcta"><a class="btn btn-p" href="/#tool" data-tool>%s무료 검사</a><a class="btn btn-g" href="/pricing/">요금 보기</a></div>') % (
         LOGO, c, BIZ["name"], BIZ["ceo"], BIZ["no"], BIZ["ecom"], BIZ["addr"], BIZ["mail"], BRAND, ico("search"))
 
@@ -112,7 +113,7 @@ ORG = {"@type": "Organization", "@id": SITE + "/#org", "name": BRAND, "alternate
        "address": {"@type": "PostalAddress", "streetAddress": "서부로 2066 성균관대학교 브릿지팩토리", "addressLocality": "수원시 장안구", "addressRegion": "경기도", "postalCode": "16419", "addressCountry": "KR"}}
 WEBSITE = {"@type": "WebSite", "@id": SITE + "/#website", "name": BRAND, "alternateName": [BRAND_EN, "한국휴머나이저 AI 휴머나이저"], "url": SITE + "/", "inLanguage": "ko-KR", "publisher": {"@id": SITE + "/#org"}}
 APP = {"@type": "WebApplication", "@id": SITE + "/#app", "name": BRAND + " AI 휴머나이저", "url": SITE + "/", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Web",
-       "inLanguage": "ko-KR", "description": "한국어 AI 작성률 검사와 AI 휴머나이징. 카피킬러 · GPT킬러 같은 AI 탐지기에 걸리는 문장만 골라 사람 문장으로 바꾸고, 같은 기준으로 AI 작성률을 다시 잽니다.",
+       "inLanguage": "ko-KR", "description": "한국어 AI 작성률 검사와 AI 휴머나이징. AI 탐지기에 걸리는 문장만 골라 사람 문장으로 바꾸고, 같은 기준으로 AI 작성률을 다시 잽니다.",
        "featureList": ["AI 작성률 무료 검사(5만 자)", "문장 단위 AI 검출 표시", "AI 휴머나이징(한국어 전용 엔진)", "한글 HWP · HWPX · 워드 DOCX · PDF 파일 지원", "말투 자동 맞춤"],
        "offers": {"@type": "AggregateOffer", "priceCurrency": "KRW", "lowPrice": "0", "highPrice": "69900", "offerCount": "5"}, "publisher": {"@id": SITE + "/#org"}}
 
@@ -413,10 +414,10 @@ def build_pricing():
 def build_faq():
     trail = [("자주 묻는 질문", "faq/")]
     allq = P.HOME["faq"] + P.PRICE_FAQ + P.MORE_FAQ
-    body = '<section class="ph"><div class="wrap">%s<h1 class="h1">자주 묻는 질문</h1><p class="lead">AI 휴머나이저, AI 작성률, 카피킬러 · GPT킬러, 결제와 토큰에 대해 자주 받는 질문을 모았습니다.</p></div></section>' % crumbs_html(trail)
+    body = '<section class="ph"><div class="wrap">%s<h1 class="h1">자주 묻는 질문</h1><p class="lead">AI 휴머나이저, AI 작성률, AI 탐지기, 결제와 토큰에 대해 자주 받는 질문을 모았습니다.</p></div></section>' % crumbs_html(trail)
     body += '<section class="sec-s"><div class="wrap-n">%s</div></section>' % faq_html(allq)
     body += cta_band()
-    page("faq/", "자주 묻는 질문 · AI 휴머나이저 FAQ | " + BRAND, "AI 휴머나이저가 무엇인지, 카피킬러 AI 작성률을 낮출 수 있는지, 무료인지, 글이 저장되는지, 결제와 토큰은 어떻게 되는지 답해 드립니다.",
+    page("faq/", "자주 묻는 질문 · AI 휴머나이저 FAQ | " + BRAND, "AI 휴머나이저가 무엇인지, AI 탐지기의 AI 작성률을 낮출 수 있는지, 무료인지, 글이 저장되는지, 결제와 토큰은 어떻게 되는지 답해 드립니다.",
          body, ld=[ld_faq(allq), ld_crumbs(trail)], priority="0.8")
 
 
@@ -438,10 +439,10 @@ def build_landings():
 def build_guides():
     trail0 = [("가이드", "guide/")]
     cards = "".join('<a class="gcard rv" href="/guide/%s/"><small>%s</small><h3>%s</h3><p>%s</p></a>' % (g["slug"], g["cat"], esc(g["h1"]), esc(g["desc"])) for g in P.GUIDES)
-    body = ('<section class="ph"><div class="wrap">%s<h1 class="h1">휴머나이징 가이드</h1><p class="lead">카피킬러 · GPT킬러가 무엇을 보고 AI 작성률을 매기는지, 어떻게 하면 AI 티가 나지 않는 글이 되는지 정리했습니다.</p></div></section>'
+    body = ('<section class="ph"><div class="wrap">%s<h1 class="h1">휴머나이징 가이드</h1><p class="lead">AI 탐지기가 무엇을 보고 AI 작성률을 매기는지, 어떻게 하면 AI 티가 나지 않는 글이 되는지 정리했습니다.</p></div></section>'
             '<section class="sec-s"><div class="wrap"><div class="gcards">%s</div></div></section>') % (crumbs_html(trail0), cards)
     body += cta_band()
-    page("guide/", "휴머나이징 가이드 · AI 작성률 낮추는 법 | " + BRAND, "카피킬러 AI 작성률 0%와 20% 미만, GPT킬러 안 걸리는 법, AI 탐지기 원리, AI 패턴 8가지, 챗GPT 티 안 나게 쓰는 법까지 정리한 휴머나이징 가이드.",
+    page("guide/", "휴머나이징 가이드 · AI 작성률 낮추는 법 | " + BRAND, "AI 작성률 0%와 20% 미만, GPT 탐지 안 걸리는 법, AI 탐지기 원리, AI 패턴 8가지, 챗GPT 티 안 나게 쓰는 법까지 정리한 휴머나이징 가이드.",
          body, ld=[ld_crumbs(trail0), {"@type": "CollectionPage", "name": BRAND + " 휴머나이징 가이드", "url": SITE + "/guide/"}], priority="0.8")
     for g in P.GUIDES:
         trail = [("가이드", "guide/"), (g["h1"], "guide/%s/" % g["slug"])]
