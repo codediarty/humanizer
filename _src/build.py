@@ -26,7 +26,7 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261122b"
+VER = "20261122c"
 TODAY = "2026-11-21"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -41,10 +41,10 @@ BIZ = {"name": "성균관컨설팅", "ceo": "이채연", "no": "272-32-01885", "
 # list = 정가(판매가의 2배, 대표 지시 2026.11.21: 가격 · 토큰 정책은 AIMarker 와 같게, 정가를 2배로 적어 50% 할인으로 보이게)
 # pg = 검사와 휴머나이징 약 몇 페이지(AIMarker 대표가 정한 값과 같게: 도구 충전 창 humanize.js PRODS 와 맞춤)
 PACKS = [
-    {"id": "lt", "name": "라이트", "tok": 100, "price": 9900, "list": 19800, "per": "99원", "who": "자기소개서 · 짧은 과제", "chars": "약 25,000자", "pg": "약 10페이지", "sub": "간단한 문장 수정", "doc": "레포트"},
-    {"id": "pl", "name": "플러스", "tok": 300, "price": 19900, "list": 39800, "per": "약 66원", "who": "레포트 · 과제 여러 편", "chars": "약 75,000자", "pg": "약 30페이지", "sub": "일반적인 문서 작업", "doc": "레포트"},
-    {"id": "pr", "name": "프로", "tok": 750, "price": 39900, "list": 79800, "per": "약 53원", "who": "논문 · 학위논문", "chars": "약 187,000자", "pg": "약 80페이지", "best": "BEST 추천", "save": "플러스보다 토큰당 약 20% 절약", "sub": "넉넉한 토큰, 더 높은 가성비", "doc": "논문"},
-    {"id": "mx", "name": "맥스", "tok": 1500, "price": 69900, "list": 139800, "per": "약 47원", "who": "논문 전체 · 여러 편", "chars": "약 375,000자", "pg": "약 200페이지", "top": "최고 혜택", "save": "플러스보다 토큰당 약 30% 절약", "sub": "최대 토큰 제공", "doc": "논문"},
+    {"id": "lt", "name": "라이트", "tok": 100, "price": 9900, "list": 19800, "per": "99원", "who": "자기소개서 · 짧은 과제", "chars": "약 25,000자", "pg": "약 10페이지", "sub": "AI 작성률 낮추기, 미니멀하게", "doc": "레포트"},
+    {"id": "pl", "name": "플러스", "tok": 350, "price": 19900, "list": 39800, "per": "약 57원", "who": "레포트 · 과제 여러 편", "chars": "약 87,500자", "pg": "약 35페이지", "sub": "AI 작성률 낮추기, 합리적으로", "doc": "레포트"},
+    {"id": "pr", "name": "프로", "tok": 1000, "price": 39900, "list": 79800, "per": "약 40원", "who": "논문 · 학위논문", "chars": "약 250,000자", "pg": "약 100페이지", "best": "BEST 추천", "save": "플러스보다 토큰당 약 30% 절약", "sub": "AI 작성률 낮추기, 더 효과적으로", "doc": "논문"},
+    {"id": "mx", "name": "맥스", "tok": 2000, "price": 69900, "list": 139800, "per": "약 35원", "who": "논문 전체 · 여러 편", "chars": "약 500,000자", "pg": "약 250페이지", "top": "최고 혜택", "save": "플러스보다 토큰당 약 39% 절약", "sub": "반복 변환으로 AI 작성률 극한까지 낮추기", "doc": "논문"},
 ]
 
 
@@ -336,6 +336,9 @@ def faq_html(faq):
     return '<div class="faq">' + "".join('<details><summary>%s</summary><div class="a"><p>%s</p></div></details>' % (esc(q), a) for q, a in faq) + "</div>"
 
 
+REP_LINE = "반복 변환할수록 AI 작성률은 계속 낮아집니다. 여러 번 변환하여 AI 작성 흔적을 극한까지 줄여보세요."   # 2026.11.22 대표: 요금 칸 아래 반복 변환 안내
+
+
 def pricing_cards(cta_text="충전하기"):
     """2026.11.21 밤 대표: 'AIMarker 처럼 간단하지만 깔끔하게'. 정가 · 50% 표시와 기능 목록(결과상세내역서 PDF · 판정 근거)은 빼고
     이름 · 한 줄 설명 · 토큰 · 가격(토큰당) · 절약 · '검사와 휴머나이징 서비스 약 N페이지' 한 줄 · 충전 단추만"""
@@ -350,7 +353,7 @@ def pricing_cards(cta_text="충전하기"):
         out.append('<div class="%s rv">%s<h3>%s</h3><p class="who">%s</p><p class="tk2"><b>%s</b>토큰</p><p class="pr2"><b>%s</b><span>토큰당 %s</span></p>%s'
                    '<p class="use">%s 검사와 휴머나이징 서비스 <b>%s</b></p>%s</div>' % (
                        cls, tag, p["name"], p["sub"], "{:,}".format(p["tok"]), won(p["price"]), p["per"], sv, p["doc"], p["pg"], btn))
-    return '<div class="price price2">' + "".join(out) + "</div>"
+    return '<div class="price price2">' + "".join(out) + "</div>" + '<p class="price-rep">%s</p>' % REP_LINE   # 2026.11.22 대표(AIMarker 13.31 과 같게)
 
 
 def cta_band(h="제출 버튼을 누르기 전, 30초면 충분합니다", p="지금 가진 글의 AI 작성률부터 무료로 확인하세요. 가입도, 카드 등록도 필요 없습니다."):
@@ -412,7 +415,7 @@ def build_pricing():
     body += P.pricing_detail(ico)
     body += '<section class="sec alt"><div class="wrap-n"><h2 class="h2 center">결제 · 토큰 자주 묻는 질문</h2>%s</div></section>' % faq_html(P.PRICE_FAQ)
     body += cta_band("먼저 무료로 검사해 보세요", "AI 작성률이 높게 나온 문장만 휴머나이징하면 토큰을 아낄 수 있습니다.")
-    page("pricing/", "AI 휴머나이징 가격 · 요금 · 토큰 충전 | " + BRAND + " AI 휴머나이저", "한국휴머나이저 요금. 라이트 100토큰 9,900원부터 맥스 1,500토큰 69,900원까지. 월 구독 없이 한 번 충전, AI 작성률 검사 무료 · 휴머나이징 1,000자 4토큰.",
+    page("pricing/", "AI 휴머나이징 가격 · 요금 · 토큰 충전 | " + BRAND + " AI 휴머나이저", "한국휴머나이저 요금. 라이트 100토큰 9,900원부터 맥스 2,000토큰 69,900원까지. 월 구독 없이 한 번 충전, AI 작성률 검사 무료 · 휴머나이징 1,000자 4토큰.",
          body, ld=[ld_offers(), ld_faq(P.PRICE_FAQ), ld_crumbs(trail)], priority="0.9")
 
 
