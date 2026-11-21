@@ -126,20 +126,89 @@ p{font-size:23.5px;line-height:1.6;color:#475569;font-weight:500}
 </body></html>""" % (BASE_CSS, lg, steps)
 
 
+
+# ---------- 2026.11.21 밤 대표: 로봇 로고, 'AIMarker 처럼 간단 · 깔끔', 정가 · 50% · 전후 막대(92% → 7%) 상자는 뺌 ----------
+ROBOT = "file://" + os.path.join(os.path.dirname(HERE), "brand", "robot.png")
+LOCKUP = ('<div class="brand"><img src="%s" alt=""><div><b>한국휴머나이저</b><i>%s</i></div></div>'
+          % (ROBOT, "".join("<span>%s</span>" % c for c in "HUMANIZER")))
+LOCKUP_CSS = """
+.brand{position:absolute;left:96px;top:78px;display:flex;align-items:center;gap:18px}
+.brand img{height:84px}
+.brand b{display:block;font-size:44px;font-weight:800;letter-spacing:-.035em;color:#0b1730;line-height:1}
+.brand i{display:flex;justify-content:space-between;margin-top:9px;font-style:normal;font-size:25px;font-weight:800;color:#0c6fe6;line-height:1}
+"""
+
+
+def thumb2_html(p):
+    badge = ""
+    if p["badge"] == "BEST 추천":
+        badge = '<div class="badge best">BEST 추천</div>'
+    elif p["badge"]:
+        badge = '<div class="badge top">%s</div>' % p["badge"]
+    save = ('<div class="save">%s</div>' % p["save"]) if p["save"] else '<div class="note">AI 작성률 검사 · 휴머나이징 서비스</div>'
+    small = len(p["tok"]) > 3
+    return """<!doctype html><html><head><meta charset="utf-8"><style>%s%s
+body{width:1200px;height:1200px;background:#fff;position:relative;overflow:hidden}
+.card{position:absolute;left:96px;top:214px;width:1008px;height:560px;border-radius:44px;overflow:hidden;
+ background:radial-gradient(120%% 140%% at 100%% 100%%,rgba(30,136,255,.55) 0%%,rgba(30,136,255,0) 46%%),linear-gradient(135deg,#0a1530 0%%,#0d2346 55%%,#0b3a6e 100%%);
+ box-shadow:0 34px 60px -24px rgba(11,23,48,.55)}
+.hd{position:absolute;left:54px;top:50px;display:flex;align-items:center;gap:14px;color:#fff;font-size:30px;font-weight:700}
+.badge{position:absolute;right:52px;top:46px;height:52px;padding:0 24px;border-radius:26px;display:flex;align-items:center;font-size:26px;font-weight:800;z-index:2}
+.badge.best{background:#fbbf24;color:#1a1a1a}
+.badge.top{background:#fff;color:#0b1730}
+.pills{position:absolute;left:52px;top:126px;display:flex;gap:14px;z-index:2}
+.pill{height:54px;padding:0 24px;border-radius:27px;display:flex;align-items:center;font-size:27px;font-weight:800}
+.pill.n{background:#0e9f6e;color:#fff}
+.pill.o{border:2px solid rgba(255,255,255,.32);color:#fff;font-weight:700}
+.big{position:absolute;left:46px;top:196px;display:flex;align-items:flex-end;color:#fff;z-index:2}
+.big b{font-size:%dpx;font-weight:850;letter-spacing:-.06em;line-height:1}
+.big span{font-size:62px;font-weight:800;margin:0 0 22px 16px}
+.save{position:absolute;left:52px;bottom:50px;height:52px;padding:0 20px;border-radius:12px;border:2px solid rgba(251,191,36,.75);background:rgba(251,191,36,.08);color:#fcd34d;font-size:24px;font-weight:800;display:flex;align-items:center;z-index:2}
+.note{position:absolute;left:54px;bottom:62px;color:rgba(255,255,255,.82);font-size:24px;font-weight:600;z-index:2}
+.price{position:absolute;right:52px;bottom:44px;color:#fff;z-index:2;font-size:66px;font-weight:850;letter-spacing:-.04em}
+.ttl{position:absolute;left:96px;top:826px;font-size:46px;font-weight:800;line-height:1.32;letter-spacing:-.035em;color:#0b1730}
+.sub{position:absolute;left:96px;top:970px;font-size:27px;line-height:1.68;color:#64748b;font-weight:500}
+.dom{position:absolute;left:96px;top:1086px;font-size:30px;font-weight:800;color:#0c6fe6}
+</style></head><body>
+%s
+<div class="card">
+ <div class="hd">AI 휴머나이징 토큰</div>%s
+ <div class="pills"><div class="pill n">%s</div><div class="pill o">%s</div></div>
+ <div class="big"><b>%s</b><span>토큰</span></div>
+ %s
+ <div class="price">%s</div>
+</div>
+<div class="ttl">AI 작성률 낮추기 · AI 휴머나이징<br>(AI 글 인간화) 서비스 토큰</div>
+<div class="sub">월 구독 없이 한 번 충전 · 쓴 만큼만 빠짐 · 5년 사용<br>검사 1,000자 4토큰 · 휴머나이징 1,000자 8토큰</div>
+<div class="dom">humanizer.co.kr</div>
+</body></html>""" % (BASE_CSS, LOCKUP_CSS, 168 if small else 196, LOCKUP, badge, p["name"], p["per"], p["tok"], save, p["price"])
+
+
+def guide2_html():
+    h = guide_html()
+    # 로고만 로봇으로(내용은 그대로)
+    lg = LOGO % (60, 60, "g", "g")
+    old_brand = '<div class="brand">%s<div><b>한국휴머나이저</b><small>KOREA HUMANIZER</small></div></div>' % lg
+    new_brand = ('<div class="brand"><img src="%s" alt="" style="height:76px"><div><b>한국휴머나이저</b>'
+                 '<small style="display:flex;justify-content:space-between;letter-spacing:0;font-size:21px;font-weight:800;color:#0c6fe6;margin-top:7px">%s</small></div></div>'
+                 % (ROBOT, "".join("<span>%s</span>" % c for c in "HUMANIZER")))
+    assert old_brand in h
+    return h.replace(old_brand, new_brand)
+
 async def main():
     async with async_playwright() as pw:
         br = await pw.chromium.launch(executable_path="/usr/bin/google-chrome", args=["--allow-file-access-from-files"])
         pg = await br.new_page(viewport={"width": 1200, "height": 1200}, device_scale_factor=1)
         for p in PACKS:
             f = os.path.join(HERE, "_t_%s.html" % p["id"])
-            open(f, "w").write(thumb_html(p))
+            open(f, "w").write(thumb2_html(p))
             await pg.goto("file://" + f)
             await pg.evaluate("document.fonts.ready")
             await pg.wait_for_timeout(250)
             await pg.screenshot(path=os.path.join(OUT, "hz-%s-1x1.jpg" % p["id"]), type="jpeg", quality=92)
         await pg.set_viewport_size({"width": 1080, "height": 1350})
         f = os.path.join(HERE, "_t_guide.html")
-        open(f, "w").write(guide_html())
+        open(f, "w").write(guide2_html())
         await pg.goto("file://" + f)
         await pg.evaluate("document.fonts.ready")
         await pg.wait_for_timeout(250)
