@@ -396,3 +396,6 @@ button{font:inherit;cursor:pointer}
 .hu-b .btn{flex:1;padding:13px 16px}
 .hero-up .btn-g{cursor:pointer}
 @media (max-width:1080px){.hero-up{display:none}}
+/* 21:49 대표: 캐릭터와 HUMANIZER 색을 초록으로 통일(로봇 그림도 초록으로 바꿈) */
+.logo .lw .en{color:var(--brand-d)}
+.ft .logo .lw .en{color:#34d399}

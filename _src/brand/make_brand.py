@@ -7,7 +7,7 @@ from PIL import Image
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 IMG = os.path.join(ROOT, "docs", "assets", "img")
-SRC = Image.open(os.path.join(HERE, "robot.png")).convert("RGBA")   # 투명 배경, 여백 잘라 둔 원본(969x1039)
+SRC = Image.open(os.path.join(HERE, "robot_green.png")).convert("RGBA")   # 2026.11.21 21:49 초록으로 통일(파란 원본 robot.png)   # 투명 배경, 여백 잘라 둔 원본(969x1039)
 
 
 def fit(h):

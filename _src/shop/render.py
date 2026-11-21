@@ -128,14 +128,14 @@ p{font-size:23.5px;line-height:1.6;color:#475569;font-weight:500}
 
 
 # ---------- 2026.11.21 밤 대표: 로봇 로고, 'AIMarker 처럼 간단 · 깔끔', 정가 · 50% · 전후 막대(92% → 7%) 상자는 뺌 ----------
-ROBOT = "file://" + os.path.join(os.path.dirname(HERE), "brand", "robot.png")
+ROBOT = "file://" + os.path.join(os.path.dirname(HERE), "brand", "robot_green.png")
 LOCKUP = ('<div class="brand"><img src="%s" alt=""><div><b>한국휴머나이저</b><i>%s</i></div></div>'
           % (ROBOT, "".join("<span>%s</span>" % c for c in "HUMANIZER")))
 LOCKUP_CSS = """
 .brand{position:absolute;left:96px;top:78px;display:flex;align-items:center;gap:18px}
 .brand img{height:84px}
 .brand b{display:block;font-size:44px;font-weight:800;letter-spacing:-.035em;color:#0b1730;line-height:1}
-.brand i{display:flex;justify-content:space-between;margin-top:9px;font-style:normal;font-size:25px;font-weight:800;color:#0c6fe6;line-height:1}
+.brand i{display:flex;justify-content:space-between;margin-top:9px;font-style:normal;font-size:25px;font-weight:800;color:#0b8a5e;line-height:1}
 """
 
 
@@ -150,7 +150,7 @@ def thumb2_html(p):
     return """<!doctype html><html><head><meta charset="utf-8"><style>%s%s
 body{width:1200px;height:1200px;background:#fff;position:relative;overflow:hidden}
 .card{position:absolute;left:96px;top:214px;width:1008px;height:560px;border-radius:44px;overflow:hidden;
- background:radial-gradient(120%% 140%% at 100%% 100%%,rgba(30,136,255,.55) 0%%,rgba(30,136,255,0) 46%%),linear-gradient(135deg,#0a1530 0%%,#0d2346 55%%,#0b3a6e 100%%);
+ background:radial-gradient(120%% 140%% at 100%% 100%%,#10b981 0%%,rgba(16,185,129,0) 46%%),linear-gradient(135deg,#0a1530 0%%,#0d2346 52%%,#0b4b55 100%%);
  box-shadow:0 34px 60px -24px rgba(11,23,48,.55)}
 .hd{position:absolute;left:54px;top:50px;display:flex;align-items:center;gap:14px;color:#fff;font-size:30px;font-weight:700}
 .badge{position:absolute;right:52px;top:46px;height:52px;padding:0 24px;border-radius:26px;display:flex;align-items:center;font-size:26px;font-weight:800;z-index:2}
@@ -168,7 +168,7 @@ body{width:1200px;height:1200px;background:#fff;position:relative;overflow:hidde
 .price{position:absolute;right:52px;bottom:44px;color:#fff;z-index:2;font-size:66px;font-weight:850;letter-spacing:-.04em}
 .ttl{position:absolute;left:96px;top:826px;font-size:46px;font-weight:800;line-height:1.32;letter-spacing:-.035em;color:#0b1730}
 .sub{position:absolute;left:96px;top:970px;font-size:27px;line-height:1.68;color:#64748b;font-weight:500}
-.dom{position:absolute;left:96px;top:1086px;font-size:30px;font-weight:800;color:#0c6fe6}
+.dom{position:absolute;left:96px;top:1086px;font-size:30px;font-weight:800;color:#0e9f6e}
 </style></head><body>
 %s
 <div class="card">
@@ -190,7 +190,7 @@ def guide2_html():
     lg = LOGO % (60, 60, "g", "g")
     old_brand = '<div class="brand">%s<div><b>한국휴머나이저</b><small>KOREA HUMANIZER</small></div></div>' % lg
     new_brand = ('<div class="brand"><img src="%s" alt="" style="height:76px"><div><b>한국휴머나이저</b>'
-                 '<small style="display:flex;justify-content:space-between;letter-spacing:0;font-size:21px;font-weight:800;color:#0c6fe6;margin-top:7px">%s</small></div></div>'
+                 '<small style="display:flex;justify-content:space-between;letter-spacing:0;font-size:21px;font-weight:800;color:#0b8a5e;margin-top:7px">%s</small></div></div>'
                  % (ROBOT, "".join("<span>%s</span>" % c for c in "HUMANIZER")))
     assert old_brand in h
     return h.replace(old_brand, new_brand)
