@@ -32,7 +32,7 @@ API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9s
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
 # 성균관컨설팅(아임웹) 한국휴머나이저 전용 상품 번호. 서버는 스크립트 속성 HZ_IDX 로 같은 번호를 hz1~hz4 로 봄
 SHOP_IDX = {"lt": "157", "pl": "156", "pr": "154", "mx": "155"}   # 2026.11.21 등록(아임웹 상품 157 라이트 · 156 플러스 · 154 프로 · 155 맥스)
-NAVER_VERIFY = ""
+NAVER_VERIFY = "b9336f93109b341c58fdb3bc67c0d75075d632d1"   # 2026.11.21 네이버 서치어드바이저 소유확인(HTML 태그)
 GOOGLE_VERIFY = ""
 INDEXNOW_KEY = "7d3f2a9c4b1e48f6a05c9e2d1b7f3a64"
 BIZ = {"name": "성균관컨설팅", "ceo": "이채연", "no": "272-32-01885", "ecom": "제2026-경기송탄-0622",
