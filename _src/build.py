@@ -26,7 +26,7 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261121a"
+VER = "20261121b"
 TODAY = "2026-11-21"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -84,8 +84,8 @@ def header(path):
 def footer():
     cols = [
         ("서비스", [("/humanize/", "휴머나이징 도구"), ("/ai-check/", "AI 작성률 무료 검사"), ("/pricing/", "요금 · 토큰 충전"), ("/faq/", "자주 묻는 질문")]),
-        ("많이 찾는 검색", [("/copykiller/", "카피킬러 AI 작성률 낮추기"), ("/gptkiller/", "GPT킬러 낮추기"), ("/ai-humanizer/", "AI 휴머나이저"), ("/lower-ai-rate/", "AI 작성률 낮추기"), ("/ai-bypass/", "AI 탐지 우회"), ("/free/", "AI 휴머나이저 무료")]),
-        ("용도별", [("/thesis/", "논문 AI 작성률 낮추기"), ("/resume/", "자기소개서 AI 작성률 낮추기"), ("/natural/", "AI 글 자연스럽게 바꾸기"), ("/guide/", "휴머나이징 가이드")]),
+        ("많이 찾는 검색", [("/copykiller/", "카피킬러 AI 작성률 낮추기"), ("/gptkiller/", "GPT킬러 낮추기"), ("/ai-humanizer/", "AI 휴머나이저"), ("/lower-ai-rate/", "AI 작성률 낮추기"), ("/ai-bypass/", "AI 탐지 우회"), ("/free/", "AI 휴머나이저 무료"), ("/humanizing/", "AI 휴머나이징이란"), ("/best-ai-humanizer/", "AI 휴머나이징 사이트 추천"), ("/ai-converter/", "AI 문장 변환기")]),
+        ("용도별", [("/thesis/", "논문 AI 작성률 낮추기"), ("/resume/", "자기소개서 AI 작성률 낮추기"), ("/natural/", "AI 글 자연스럽게 바꾸기"), ("/report/", "대학 과제 · 레포트 AI 작성률"), ("/results/", "실제 측정 결과"), ("/guide/", "휴머나이징 가이드")]),
         ("회사 · 정책", [("/about/", "회사 소개"), ("/terms/", "이용약관"), ("/privacy/", "개인정보처리방침"), ("mailto:" + BIZ["mail"], "문의 " + BIZ["mail"])]),
     ]
     c = "".join('<div><h4>%s</h4><ul>%s</ul></div>' % (h, "".join('<li><a href="%s">%s</a></li>' % (u, t) for u, t in L)) for h, L in cols)
@@ -373,18 +373,18 @@ def build_home():
 def build_humanize():
     body = hero_with_tool('<b>도구</b> AI 작성률 검사 · 휴머나이징', 'AI 휴머나이징 도구', '글을 붙여 넣거나 파일을 올리면 AI 작성률부터 무료로 보여 드립니다. 걸리는 문장은 휴머나이징으로 사람 문장으로 바꾸고, 같은 기준으로 다시 잽니다.', cls="hero lp-hero")
     body += demo_json() + P.how_section(ico) + cta_band()
-    page("humanize/", "AI 휴머나이징 도구 · AI 작성률 검사 | " + BRAND, "한국휴머나이저 AI 휴머나이징 도구. 글이나 한글 · 워드 · PDF 파일을 넣으면 AI 작성률과 AI로 검출된 문장을 보여 주고, 사람 문장으로 바꿔 드립니다.",
+    page("humanize/", "AI 휴머나이징 프로그램 · AI 휴머나이징 도구 · AI 작성률 검사 | " + BRAND, "한국휴머나이저 AI 휴머나이징 도구. 글이나 한글 · 워드 · PDF 파일을 넣으면 AI 작성률과 AI로 검출된 문장을 보여 주고, 사람 문장으로 바꿔 드립니다.",
          body, ld=[APP, ld_crumbs([("휴머나이징 도구", "humanize/")])], tool=True, priority="0.9")
 
 
 def build_pricing():
     trail = [("요금", "pricing/")]
-    body = ('<section class="ph"><div class="wrap">%s<h1 class="h1">요금 · 토큰 충전</h1><p class="lead">지금 모든 토큰이 정가의 <b>50%%</b> 가격입니다. 월 구독 없이 한 번 충전하고 쓴 만큼만, 남은 토큰은 5년 동안 사라지지 않습니다.</p></div></section>'
+    body = ('<section class="ph"><div class="wrap">%s<h1 class="h1">AI 휴머나이징 가격 · 요금 · 토큰 충전</h1><p class="lead">지금 모든 토큰이 정가의 <b>50%%</b> 가격입니다. 월 구독 없이 한 번 충전하고 쓴 만큼만, 남은 토큰은 5년 동안 사라지지 않습니다.</p></div></section>'
             '<section class="sec-s"><div class="wrap">%s<p class="price-note">결제는 운영사 성균관컨설팅 결제 페이지에서 가입 없이 카드 · 간편결제로 합니다. 결제하면 보통 1분 안에, 적은 이메일로 16자리 토큰 코드가 갑니다.</p></div></section>') % (crumbs_html(trail), pricing_cards())
     body += P.pricing_detail(ico)
     body += '<section class="sec alt"><div class="wrap-n"><h2 class="h2 center">결제 · 토큰 자주 묻는 질문</h2>%s</div></section>' % faq_html(P.PRICE_FAQ)
     body += cta_band("먼저 무료로 검사해 보세요", "AI 작성률이 높게 나온 문장만 휴머나이징하면 토큰을 아낄 수 있습니다.")
-    page("pricing/", "요금 · 토큰 충전 | " + BRAND + " AI 휴머나이저", "한국휴머나이저 요금. 정가의 50% 가격으로 라이트 100토큰 9,900원부터 맥스 1,500토큰 69,900원까지. 월 구독 없이 한 번 충전, AI 작성률 검사 1,000자 4토큰 · 휴머나이징 1,000자 8토큰.",
+    page("pricing/", "AI 휴머나이징 가격 · 요금 · 토큰 충전 | " + BRAND + " AI 휴머나이저", "한국휴머나이저 요금. 정가의 50% 가격으로 라이트 100토큰 9,900원부터 맥스 1,500토큰 69,900원까지. 월 구독 없이 한 번 충전, AI 작성률 검사 1,000자 4토큰 · 휴머나이징 1,000자 8토큰.",
          body, ld=[ld_offers(), ld_faq(P.PRICE_FAQ), ld_crumbs(trail)], priority="0.9")
 
 
