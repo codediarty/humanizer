@@ -306,3 +306,41 @@ button{font:inherit;cursor:pointer}
 #hzBuy .hz-lp s{text-decoration-thickness:1.5px}
 #hzBuy .hz-lp b{color:#e11d48;font-weight:850}
 .lead b{color:#e11d48}
+/* ===== 2026.11.21 밤 첫 화면 다시(대표 요청): 로고 묶음 · 좌우 균형 · 물결 밑줄 걷기 · 신뢰감 있는 큰 제목 ===== */
+/* 로고: 남색 타일 'ㅎ' + 한국휴머나이저 / 같은 폭으로 벌린 HUMANIZER */
+.logo{gap:11px}
+.logo svg{width:38px;height:38px;border-radius:10px}
+.logo .lw{display:inline-flex;flex-direction:column;line-height:1}
+.logo .lw b{font-size:20px;font-weight:800;letter-spacing:-.035em;color:var(--navy)}
+.logo .lw .en{display:flex;justify-content:space-between;gap:1px;margin-top:5px;font-size:14px;font-weight:800;line-height:1;letter-spacing:0;color:var(--brand-d)}
+.logo .lw .en i{font-style:normal}
+.ft .logo .lw b{color:#fff}
+.ft .logo .lw .en{color:#34d399}
+.ft .logo svg rect{fill:#1a2d57}
+/* 제목: 물결 밑줄 · 무지개 글씨 대신 단정한 한 색 */
+.h1 .u::after{content:none;display:none}
+.h1 .u{color:inherit}
+.h1 em{background:none;-webkit-background-clip:border-box;background-clip:border-box;color:var(--brand-d)}
+.hero .h1{font-size:clamp(34px,4.4vw,56px);line-height:1.17;letter-spacing:-.045em;font-weight:800;color:var(--navy);margin:20px 0 18px}
+.lp-hero .h1{font-size:clamp(32px,3.9vw,50px)}
+.hero .lead{font-size:clamp(16px,1.45vw,18px);line-height:1.78;max-width:34em;margin:0 0 26px}
+.hero{background:radial-gradient(900px 440px at 80% -5%,rgba(14,159,110,.07),transparent 65%),linear-gradient(180deg,#fbfcfe 0%,#f2f5fa 100%)}
+.hero::before{opacity:.65}
+/* 배치: 위 줄은 글(왼쪽) · 예시(오른쪽) 같은 높이, 검사 도구는 아래 넓은 줄 */
+.hero .hero-grid.hg2{grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);grid-template-areas:"copy demo" "tool tool";gap:44px 56px;align-items:center}
+.hg2 .hero-copy{grid-area:copy}
+.hg2 .hero-demo{grid-area:demo}
+.hg2 .hero-tool{grid-area:tool;width:100%;max-width:1000px;justify-self:center;scroll-margin-top:84px}
+.hero-grid.hg2 .demo{position:relative;top:auto}
+.hg2 .hero-tool .hz12-steps{justify-content:center}
+.hero-cta{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 24px}
+.hero-cta .btn-l{padding:15px 24px}
+@media (max-width:1080px){.hero .hero-grid.hg2{grid-template-columns:minmax(0,1fr);grid-template-areas:"copy" "tool" "demo";gap:26px}.hg2 .hero-cta{display:none}.hg2 .hero-pts{margin-bottom:0}}
+@media (max-width:760px){.logo{gap:9px}.logo svg{width:34px;height:34px;border-radius:9px}.logo .lw b{font-size:17.5px}.logo .lw .en{font-size:12px;margin-top:4px}.hero .h1{margin:16px 0 14px}.hero .lead{line-height:1.72;margin-bottom:18px}}
+@media (max-width:360px){.logo .lw b{font-size:16px}.logo .lw .en{font-size:11px}}
+/* 첫 화면 알약 두 개: 무료 · 파일 보호(대표 요청) */
+.eb-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.eb-row .eyebrow{margin:0}
+.eb-safe b{width:22px;height:22px;padding:0;justify-content:center;background:var(--navy)}
+.eb-safe b .ico{width:12.5px;height:12.5px;stroke-width:2.4}
+.demo-tag.ok{background:var(--brand)}

@@ -26,7 +26,7 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261121b"
+VER = "20261121c"
 TODAY = "2026-11-21"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -65,10 +65,13 @@ def shop(pid):
     return SHOP % ix if ix else ""
 
 
-LOGO_SVG = ('<svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1730"/><stop offset="1" stop-color="#13254a"/></linearGradient></defs>'
-            '<rect width="40" height="40" rx="11" fill="url(#lg)"/><path d="M12 11v18M28 11v18M12 20h16" stroke="#fff" stroke-width="3.2" stroke-linecap="round"/>'
-            '<circle cx="31.5" cy="31.5" r="5.5" fill="#10b981" stroke="#0b1730" stroke-width="2"/><path d="m29.2 31.6 1.6 1.6 3-3.2" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>')
-LOGO = '<a class="logo" href="/" aria-label="%s 홈">%s<span>%s<small>KOREA HUMANIZER</small></span></a>' % (BRAND, LOGO_SVG, BRAND)
+# 2026.11.21 밤 로고 새로(대표: '로고 좀 있어 보이게, 밑에는 영어로 크게 휴머나이저'): 남색 타일 안의 'ㅎ'(한국 · 휴머나이저의 첫 자음)이
+# 사람 모양(모자 + 얼굴)으로도 읽히게, 얼굴 고리는 사람 문장을 뜻하는 초록. 글자 묶음은 한국휴머나이저 아래 HUMANIZER 를 같은 폭으로 벌려 씀
+LOGO_SVG = ('<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="11" fill="#0b1730"/>'
+            '<path d="M16.6 9h6.8M11 14.8h18" stroke="#fff" stroke-width="3" stroke-linecap="round"/>'
+            '<circle cx="20" cy="24.6" r="6.3" fill="none" stroke="#10b981" stroke-width="3.4"/></svg>')
+LOGO = ('<a class="logo" href="/" aria-label="%s 홈">%s<span class="lw"><b>%s</b><span class="en" aria-hidden="true">%s</span></span></a>'
+        % (BRAND, LOGO_SVG, BRAND, "".join("<i>%s</i>" % ch for ch in "HUMANIZER")))
 
 NAV = [("ai-humanizer/", "AI 휴머나이저"), ("copykiller/", "카피킬러 AI 작성률"), ("gptkiller/", "GPT킬러"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]
 
@@ -272,13 +275,15 @@ def demo_samples():
             nch += n
             isai = i in flags
             p0, p1 = scores.get(str(i)), ascores.get(str(i))
-            tag = ('<i class="demo-tag" data-p1="%s">AI %s%%</i>' % ("" if p1 is None else p1, p0)) if (isai and p0 is not None) else ""
+            # 2026.11.21 밤 대표: 'AI 100%' 대신 'AI 패턴', 바꾼 뒤에는 '사람 문장' 대신 'AI 미검출'(바꾼 뒤 검출 문장 0개일 때만)
+            tag = ('<i class="demo-tag" data-p0="%s" data-p1="%s">AI 패턴</i>' % (p0, "" if p1 is None else p1)) if (isai and p0 is not None) else ""
+            okt = '<i class="demo-tag ok">AI 미검출</i>' if (isai and p0 is not None and n and S["after"].get("n") == 0) else ""
             A_ = "".join(esc(o[1]) if o[0] == "e" else _chg(o[1], o[2], "anim") for o in ops)
             S_ = "".join(esc(o[1]) if o[0] == "e" else _chg(o[1], o[2], "src") for o in ops)
             D_ = "".join(esc(o[2]) if o[0] == "e" else _chg(o[1], o[2], "dst") for o in ops)
             anim.append('<span class="s%s">%s%s</span> ' % (" ai" if isai else "", A_.rstrip(), tag))
             src.append('<span class="s%s">%s%s</span> ' % (" ai" if isai else "", S_.rstrip(), tag.replace("demo-tag", "demo-tag st")))
-            dst.append('<span class="s%s">%s</span> ' % (" hu" if n else "", D_.rstrip()))
+            dst.append('<span class="s%s">%s%s</span> ' % (" hu" if n else "", D_.rstrip(), okt))
         out.append({"k": S["k"], "label": S["label"], "file": S["file"], "before": S["before"], "after": S["after"], "changes": nch,
                     "doc": '<p class="ai-blk">' + "".join(anim).strip() + "</p>",
                     "src": '<p class="ai-blk">' + "".join(src).strip() + "</p>", "dst": '<p class="hu-blk">' + "".join(dst).strip() + "</p>"})
@@ -299,7 +304,7 @@ def demo_card():
             '<div class="demo-meter"><div class="dm from bad"><small>휴머나이징 전 · AI작성률</small><b>%s<small style="font-size:18px">%%</small> <em>%s</em></b><div class="dm-bar"><i style="width:%s%%"></i></div></div>'
             '<span class="dm-arr" aria-hidden="true">%s</span>'
             '<div class="dm to good wait"><small>휴머나이징 후 · AI작성률</small><b>– <em>대기</em></b><div class="dm-bar"><i style="width:0"></i></div></div></div>'
-            '<div class="demo-legend"><span class="a"><i></i>AI 작성률 검출 문장</span><span class="h"><i></i>사람 문장으로 바꾼 곳</span><span class="demo-state" aria-live="polite"></span></div>'
+            '<div class="demo-legend"><span class="a"><i></i>AI 패턴 검출 문장</span><span class="h"><i></i>AI 패턴을 지운 곳</span><span class="demo-state" aria-live="polite"></span></div>'
             '<div class="demo-doc">%s</div>'
             '<div class="demo-ft"><button class="btn btn-p btn-s" type="button" data-demo-run data-run="%s휴머나이징 보기" data-again="%s처음부터 다시">%s휴머나이징 보기</button>'
             '<a class="btn btn-g btn-s" href="#tool" data-tool>내 글로 해 보기</a><span class="note">%s</span></div></div>') % (
@@ -346,10 +351,17 @@ def crumbs_html(trail):
 
 
 def hero_with_tool(eyebrow, h1, lead, pts=None, cls="hero"):
+    """2026.11.21 밤(대표: '좌측은 너무 길어서 잘리고 우측은 공간이 남아'): 첫 화면은 왼쪽 글 + 오른쪽 예시를 같은 높이로 맞추고,
+    검사 도구는 그 바로 아래 넓은 칸으로(id="tool" 그대로라 '무료 검사' 단추 · 모바일 고정 단추가 그대로 씀). 모바일은 글 → 도구 → 예시"""
     pts = pts or ["한국어 전용 엔진", "문장 단위 AI 작성률", "한글 · 워드 · PDF 그대로", "글은 저장하지 않음"]
-    return ('<section class="%s" id="top"><div class="wrap"><div class="hero-grid"><div id="tool" class="tool-w"><p class="eyebrow">%s</p><h1 class="h1">%s</h1><p class="lead">%s</p>'
-            '<ul class="hero-pts">%s</ul>%s</div><div>%s</div></div></div></section>') % (
-        cls, eyebrow, h1, lead, "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
+    return ('<section class="%s" id="top"><div class="wrap"><div class="hero-grid hg2">'
+            '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-safe"><b>%s</b>파일 암호화 보호 · 작업 후 자동 삭제</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
+            '<div class="hero-cta"><a class="btn btn-p btn-l" href="#tool" data-tool>%s무료로 AI 작성률 검사</a><a class="btn btn-g btn-l" href="/pricing/">요금 보기</a></div>'
+            '<ul class="hero-pts">%s</ul></div>'
+            '<div id="tool" class="tool-w hero-tool">%s</div>'
+            '<div class="hero-demo">%s</div>'
+            '</div></div></section>') % (
+        cls, eyebrow, ico("lock"), h1, lead, ico("search"), "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
 
 
 # ---------------- 홈 ----------------
@@ -360,7 +372,7 @@ def build_home():
     body += P.trust_strip(ico)
     body += P.alarm_section(ico)
     body += ('<section class="sec" id="example"><div class="wrap"><div class="center"><p class="kick">%s실제 엔진으로 잰 결과</p><h2 class="h2">보라색 문장이 사라질 때까지,<br>뜻은 그대로 두고 말투만 사람처럼</h2>'
-             '<p class="sub">아래 예시는 한국휴머나이저 엔진에 그대로 넣어 잰 실제 값입니다. 보라색은 AI로 검출된 문장, 초록색은 사람 문장으로 바꾼 곳입니다.</p></div>%s</div></section>') % (ico("eye"), compare_block())
+             '<p class="sub">아래 예시는 한국휴머나이저 엔진에 그대로 넣어 잰 실제 값입니다. 보라색은 AI 패턴이 검출된 문장, 초록색은 AI 패턴을 지운 곳입니다.</p></div>%s</div></section>') % (ico("eye"), compare_block())
     body += P.how_section(ico)
     body += P.features_section(ico)
     body += P.compare_table(ico)
@@ -407,7 +419,7 @@ def build_landings():
         body = hero_with_tool(L["eyebrow"], L["h1"], L["lead"], L.get("pts"), cls="hero lp-hero")
         body += demo_json()
         body += '<section class="sec-s"><div class="wrap-n">%s<div class="answer">%s</div><div class="prose">%s</div></div></section>' % (crumbs_html(trail), L["answer"], L["body"])
-        body += ('<section class="sec alt"><div class="wrap"><div class="center"><p class="kick">%s실제 엔진으로 잰 결과</p><h2 class="h2">%s</h2><p class="sub">보라색은 AI로 검출된 문장, 초록색은 사람 문장으로 바꾼 곳입니다.</p></div>%s</div></section>') % (ico("eye"), L.get("cmp_h", "휴머나이징 전과 후, 직접 비교해 보세요"), compare_block())
+        body += ('<section class="sec alt"><div class="wrap"><div class="center"><p class="kick">%s실제 엔진으로 잰 결과</p><h2 class="h2">%s</h2><p class="sub">보라색은 AI 패턴이 검출된 문장, 초록색은 AI 패턴을 지운 곳입니다.</p></div>%s</div></section>') % (ico("eye"), L.get("cmp_h", "휴머나이징 전과 후, 직접 비교해 보세요"), compare_block())
         body += P.how_section(ico)
         body += '<section class="sec"><div class="wrap-n"><h2 class="h2 center">%s 자주 묻는 질문</h2>%s<div class="links" style="margin-top:28px;justify-content:center">%s</div></div></section>' % (
             esc(L["crumb"]), faq_html(L["faq"]), "".join('<a href="/%s">%s</a>' % (u, t) for u, t in L["related"]))

@@ -63,7 +63,7 @@
       say('<span class="dot"></span>AI 작성률 검사 중');
       demo.classList.remove('scanning'); void demo.offsetWidth; demo.classList.add('scanning');
       sents.forEach(function (x, j) { later(function () { x.classList.remove('pre'); }, RM ? 0 : 260 + j * 230); });
-      later(function () { count(mFrom, 0, S.before.rate, RM ? 1 : 900, S.before.band); say('<b class="bad">AI 작성률 ' + S.before.rate + '% · ' + S.before.band + '</b> · AI 검출 문장 ' + S.before.n + '개'); }, RM ? 0 : 260 + sents.length * 230);
+      later(function () { count(mFrom, 0, S.before.rate, RM ? 1 : 900, S.before.band); say('<b class="bad">AI 작성률 ' + S.before.rate + '% · ' + S.before.band + '</b> · AI 패턴 문장 ' + S.before.n + '개'); }, RM ? 0 : 260 + sents.length * 230);
       later(function () { if (!hover) humanize(); }, RM ? 400 : 1400 + sents.length * 230 + 1600);
     }
     function humanize() {
@@ -77,11 +77,12 @@
         later(function () {
           x.textContent = x.getAttribute('data-n') || ''; x.classList.remove('del'); x.classList.add('ins'); done++;
           var b = st && st.querySelector('b'); if (b) b.textContent = done;
-          var s = x.closest('.s'); if (s && !$('.x:not(.ins)', s)) { s.classList.remove('ai'); s.classList.add('hu'); var tg = $('.demo-tag', s); if (tg) { tg.classList.add('ok'); var p1 = tg.getAttribute('data-p1'); tg.textContent = p1 === '' ? '사람 문장' : 'AI ' + p1 + '%'; } }
+          var s = x.closest('.s'); if (s && !$('.x:not(.ins)', s)) { s.classList.remove('ai'); s.classList.add('hu'); var tg = $('.demo-tag', s); if (tg && S.after.n === 0) { tg.classList.add('ok'); tg.textContent = 'AI 미검출'; } }
         }, j * gap + (RM ? 0 : 260));
       });
       later(function () {
         $$('.s.ai', doc).forEach(function (s) { s.classList.remove('ai'); s.classList.add('hu'); });
+        if (S.after.n === 0) $$('.demo-tag:not(.ok)', doc).forEach(function (tg) { tg.classList.add('ok'); tg.textContent = 'AI 미검출'; });
         if (blk) blk.classList.add('done');
         count(mTo, S.before.rate, S.after.rate, RM ? 1 : 1300, S.after.band);
         say('<b class="good">AI 작성률 ' + S.before.rate + '% → ' + S.after.rate + '% · ' + S.after.band + '</b> · 바꾼 곳 ' + n + '곳 · 뜻 · 숫자 그대로');
@@ -108,7 +109,7 @@
       L.innerHTML = S.src; R.innerHTML = S.dst;
       pl.className = 'pill l ' + bandCls(S.before.band); pl.textContent = 'AI 작성률 ' + S.before.rate + '% · ' + S.before.band;
       pr.className = 'pill r ' + bandCls(S.after.band); pr.textContent = 'AI 작성률 ' + S.after.rate + '% · ' + S.after.band;
-      if (ft) ft.innerHTML = '<span>AI로 검출된 문장 <b>' + S.before.n + '개 → ' + S.after.n + '개</b></span><span>바꾼 곳 <b>' + S.changes + '곳</b></span><span>숫자 · 이름 · 인용 <b>그대로</b></span>';
+      if (ft) ft.innerHTML = '<span>AI 패턴 문장 <b>' + S.before.n + '개 → ' + S.after.n + '개</b></span><span>바꾼 곳 <b>' + S.changes + '곳</b></span><span>숫자 · 이름 · 인용 <b>그대로</b></span>';
     }
     $$('.cmp-tabs button').forEach(function (b, j) { b.addEventListener('click', function () { pick(j); }); });
     pick(0);
