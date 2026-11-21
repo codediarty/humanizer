@@ -421,3 +421,7 @@ button{font:inherit;cursor:pointer}
 /* 22:18 메뉴 하나로 통일: AI 휴머나이저(AI 작성률 낮추기). 자리가 넉넉해져 넓은 화면에서는 '무료 AI 작성률 검사' 단추 글자를 다시 다 보여 줌 */
 .nav a small,.mnav a small{font-size:inherit;font-weight:500;margin-left:1px}
 @media (min-width:1081px){.hd-r .btn-p .hl{display:inline}.hd-r .btn-p .hs{display:none}}
+/* 22:20 하나로 통일: 바닥글 링크 칸 셋 */
+.ft-top{grid-template-columns:1.4fr repeat(3,1fr)}
+@media (max-width:1080px){.ft-top{grid-template-columns:1fr 1fr}}
+.ft li a{text-decoration:none!important}.ft li a:hover{text-decoration:underline!important;text-underline-offset:3px}
