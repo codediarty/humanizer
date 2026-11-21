@@ -26,7 +26,7 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261121h"
+VER = "20261121i"
 TODAY = "2026-11-21"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -81,7 +81,9 @@ LOGO = ('<a class="logo lk" href="/" aria-label="%s 홈"><img class="logo-k" src
         '<span class="lw2"><b>%s</b><span class="en2" aria-hidden="true"><i>HUMANIZER</i></span></span></a>' % (BRAND, BRAND))
 
 # 2026.11.21 밤 대표: 카피킬러 · GPT킬러 이름을 대놓고 쓰지 않음(상표 문제 걱정). 메뉴는 일반어로, 두 쪽은 주소 그대로 남김
-NAV = [("ai-humanizer/", "AI 휴머나이저"), ("lower-ai-rate/", "AI 작성률 낮추기"), ("ai-check/", "AI 작성률 검사"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]
+NAV_3 = [("ai-humanizer/", "AI 휴머나이저"), ("lower-ai-rate/", "AI 작성률 낮추기"), ("ai-check/", "AI 작성률 검사"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]
+# 22:18 대표: 위에 셋(AI 휴머나이저 · AI 작성률 낮추기 · AI 작성률 검사)이 있으니 헷갈림, 'AI 휴머나이저(AI 작성률 낮추기)' 하나로 통일. 두 쪽은 바닥글 · 관련 링크로 그대로 닿음
+NAV = [("ai-humanizer/", "AI 휴머나이저<small>(AI 작성률 낮추기)</small>"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]
 
 
 def header(path):

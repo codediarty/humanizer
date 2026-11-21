@@ -418,3 +418,6 @@ button{font:inherit;cursor:pointer}
 /* 좁은 노트북 폭(1081~1240px)에서 새 로고 · 메뉴 · 단추가 겹치지 않게 */
 .logo.lk{flex:none}
 @media (max-width:1240px){.hd-in{gap:16px}.nav{margin-left:0;gap:2px}.nav a{padding:8px 8px;font-size:14px}.logo .logo-k{height:40px}.logo .lw2 b{font-size:20px}.logo .lw2 .en2{font-size:9px;margin-top:5px}.hd-r .btn-p .hl{display:none}.hd-r .btn-p .hs{display:inline}}
+/* 22:18 메뉴 하나로 통일: AI 휴머나이저(AI 작성률 낮추기). 자리가 넉넉해져 넓은 화면에서는 '무료 AI 작성률 검사' 단추 글자를 다시 다 보여 줌 */
+.nav a small,.mnav a small{font-size:inherit;font-weight:500;margin-left:1px}
+@media (min-width:1081px){.hd-r .btn-p .hl{display:inline}.hd-r .btn-p .hs{display:none}}
