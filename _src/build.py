@@ -34,6 +34,7 @@ SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
 SHOP_IDX = {"lt": "157", "pl": "156", "pr": "154", "mx": "155"}   # 2026.11.21 등록(아임웹 상품 157 라이트 · 156 플러스 · 154 프로 · 155 맥스)
 NAVER_VERIFY = "b9336f93109b341c58fdb3bc67c0d75075d632d1"   # 2026.11.21 네이버 서치어드바이저 소유확인(HTML 태그)
 GOOGLE_VERIFY = ""
+BING_VERIFY = "6CFE39150A28BBBB4694B507E2E689C0"   # 2026.11.21 Bing 웹마스터 도구 소유확인(HTML 메타 태그)
 INDEXNOW_KEY = "7d3f2a9c4b1e48f6a05c9e2d1b7f3a64"
 BIZ = {"name": "성균관컨설팅", "ceo": "이채연", "no": "272-32-01885", "ecom": "제2026-경기송탄-0622",
        "addr": "경기도 수원시 장안구 서부로 2066 성균관대학교 브릿지팩토리(연구실)", "mail": "contact@skkc.co.kr"}
@@ -152,6 +153,8 @@ def page(path, title, desc, body, *, ld=None, tool=False, og=None, ptype="websit
         head.append('<meta name="naver-site-verification" content="%s">' % NAVER_VERIFY)
     if GOOGLE_VERIFY:
         head.append('<meta name="google-site-verification" content="%s">' % GOOGLE_VERIFY)
+    if BING_VERIFY:
+        head.append('<meta name="msvalidate.01" content="%s">' % BING_VERIFY)
     head.append('<script>document.documentElement.className+=" js";setTimeout(function(){if(!window.HZ_SITE){var a=document.querySelectorAll(".rv");for(var i=0;i<a.length;i++)a[i].className+=" in"}},3000)</script>')
     head.append('<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">')
     if tool:
