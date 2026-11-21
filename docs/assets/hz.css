@@ -415,3 +415,6 @@ button{font:inherit;cursor:pointer}
 @media (max-width:360px){.logo .lw2 b{font-size:17px}.logo .lw2 .en2{font-size:8px}}
 @media (max-width:520px){.logo.lk{gap:7px}.logo .logo-k{height:31px}.logo .lw2 b{font-size:16.5px}.logo .lw2 .en2{font-size:7.5px;gap:4px;margin-top:4px}}
 @media (max-width:360px){.logo .logo-k{height:27px}.logo .lw2 b{font-size:15px}.logo .lw2 .en2{font-size:7px}}
+/* 좁은 노트북 폭(1081~1240px)에서 새 로고 · 메뉴 · 단추가 겹치지 않게 */
+.logo.lk{flex:none}
+@media (max-width:1240px){.hd-in{gap:16px}.nav{margin-left:0;gap:2px}.nav a{padding:8px 8px;font-size:14px}.logo .logo-k{height:40px}.logo .lw2 b{font-size:20px}.logo .lw2 .en2{font-size:9px;margin-top:5px}.hd-r .btn-p .hl{display:none}.hd-r .btn-p .hs{display:inline}}
