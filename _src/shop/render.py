@@ -88,7 +88,7 @@ body{width:1200px;height:1200px;background:#fff;position:relative;overflow:hidde
  <div class="price"><del>정가 %s</del><div class="row"><span class="off">50%%</span><b>%s</b></div></div>
 </div>
 <div class="ttl">AI 작성률 낮추기 · AI 휴머나이징<br>(AI 글 인간화) 토큰</div>
-<div class="sub">월 구독 없이 한 번 충전 · 쓴 만큼만 빠짐 · 5년 사용<br>검사 1,000자 4토큰 · 휴머나이징 1,000자 8토큰</div>
+<div class="sub">월 구독 없이 한 번 충전 · 쓴 만큼만 빠짐 · 5년 사용<br>검사 무료 · 휴머나이징 1,000자 4토큰</div>
 <div class="dom">humanizer.co.kr</div>
 </body></html>""" % (BASE_CSS, 168 if small else 196, lg, GLYPH, badge, p["name"], p["per"], p["tok"], save, p["list"], p["price"])
 
@@ -179,7 +179,7 @@ body{width:1200px;height:1200px;background:#fff;position:relative;overflow:hidde
  <div class="price">%s</div>
 </div>
 <div class="ttl">AI 작성률 낮추기 · AI 휴머나이징<br>(AI 글 인간화) 서비스 토큰</div>
-<div class="sub">월 구독 없이 한 번 충전 · 쓴 만큼만 빠짐 · 5년 사용<br>검사 1,000자 4토큰 · 휴머나이징 1,000자 8토큰</div>
+<div class="sub">월 구독 없이 한 번 충전 · 쓴 만큼만 빠짐 · 5년 사용<br>검사 무료 · 휴머나이징 1,000자 4토큰</div>
 <div class="dom">humanizer.co.kr</div>
 </body></html>""" % (BASE_CSS, LOCKUP_CSS, 168 if small else 196, LOCKUP, badge, p["name"], p["per"], p["tok"], save, p["price"])
 

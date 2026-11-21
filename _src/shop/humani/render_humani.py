@@ -9,9 +9,9 @@ OUT = os.path.join(HERE, "out"); os.makedirs(OUT, exist_ok=True)
 FONT = "file://" + os.path.join(os.path.dirname(HERE), "pretendard.css")
 P = [
     {"id": "lt", "name": "라이트", "tok": "100", "per": "토큰당 99원", "price": "9,900원", "list": "19,800원", "badge": ("정가의 50%", "o"), "note": "짧은 과제 · 자기소개서 한두 문항"},
-    {"id": "pl", "name": "플러스", "tok": "300", "per": "토큰당 약 57원", "price": "19,900원", "list": "39,800원", "badge": ("정가의 50%", "o"), "note": "레포트 여러 편 · 자소서 한 세트"},
-    {"id": "pr", "name": "프로", "tok": "750", "per": "토큰당 약 40원", "price": "39,900원", "list": "79,800원", "badge": ("BEST 추천", "y"), "save": "플러스보다 토큰당 20% 절약"},
-    {"id": "mx", "name": "맥스", "tok": "1,500", "per": "토큰당 약 35원", "price": "69,900원", "list": "139,800원", "badge": ("최고 혜택", "w"), "save": "플러스보다 토큰당 30% 절약"},
+    {"id": "pl", "name": "플러스", "tok": "350", "per": "토큰당 약 57원", "price": "19,900원", "list": "39,800원", "badge": ("정가의 50%", "o"), "note": "레포트 여러 편 · 자소서 한 세트"},
+    {"id": "pr", "name": "프로", "tok": "1,000", "per": "토큰당 약 40원", "price": "39,900원", "list": "79,800원", "badge": ("BEST 추천", "y"), "save": "플러스보다 토큰당 약 30% 절약"},
+    {"id": "mx", "name": "맥스", "tok": "2,000", "per": "토큰당 약 35원", "price": "69,900원", "list": "139,800원", "badge": ("최고 혜택", "w"), "save": "플러스보다 토큰당 약 39% 절약"},
 ]
 CHECK = '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M20 6 9 17l-5-5" fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 PEN = '<svg viewBox="0 0 24 24" width="30" height="30"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" fill="none" stroke="#34d399" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
