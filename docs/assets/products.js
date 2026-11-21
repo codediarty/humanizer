@@ -1,0 +1,2 @@
+/* 한국휴머나이저 상품(빌드가 만듦: _src/build.py SHOP_IDX · PACKS) */
+window.AMP = {"shop": "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1", "idx": {"lt": "157", "pl": "156", "pr": "154", "mx": "155"}, "items": {"lt": {"name": "라이트", "tok": 100, "price": 9900, "list": 19800}, "pl": {"name": "플러스", "tok": 300, "price": 19900, "list": 39800}, "pr": {"name": "프로", "tok": 750, "price": 39900, "list": 79800}, "mx": {"name": "맥스", "tok": 1500, "price": 69900, "list": 139800}}};
