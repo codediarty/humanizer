@@ -359,15 +359,16 @@ def crumbs_html(trail):
 def hero_with_tool(eyebrow, h1, lead, pts=None, cls="hero"):
     """2026.11.21 밤(대표: '좌측은 너무 길어서 잘리고 우측은 공간이 남아'): 첫 화면은 왼쪽 글 + 오른쪽 예시를 같은 높이로 맞추고,
     검사 도구는 그 바로 아래 넓은 칸으로(id="tool" 그대로라 '무료 검사' 단추 · 모바일 고정 단추가 그대로 씀). 모바일은 글 → 도구 → 예시"""
-    pts = pts or ["한국어 전용 엔진", "문장 단위 AI 작성률", "한글 · 워드 · PDF 그대로", "파일 암호화 보호 · 작업 후 자동 삭제"]
+    pts = pts or ["한국어 전용 엔진", "문장 단위 AI 작성률", "한글 · 워드 · PDF 그대로"]   # 2026.11.21 21:24 대표: 파일 보호 문구는 자주 묻는 질문으로
     return ('<section class="%s" id="top"><div class="wrap"><div class="hero-grid hg2">'
             '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-2"><b>%s</b>AI 작성률 낮추기</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
-            '<div class="hero-cta"><a class="btn btn-p btn-l" href="#tool" data-tool>%s무료로 AI 작성률 검사</a><a class="btn btn-g btn-l" href="/pricing/">요금 보기</a></div>'
+            '<div class="hero-up" data-hero-drop><div class="hu-h"><span class="hu-ic">%s</span><p><b>파일을 올리면 AI 작성률을 바로 검사합니다</b><span>한글(HWP · HWPX) · 워드(DOCX) · PDF · 텍스트, 끌어다 놓아도 됩니다</span></p></div>'
+            '<div class="hu-b"><button class="btn btn-p" type="button" data-hero-pick>%s파일 올리기</button><a class="btn btn-g" href="#tool" data-tool>%s글 붙여 넣기</a></div></div>'
             '<ul class="hero-pts">%s</ul></div>'
             '<div id="tool" class="tool-w hero-tool">%s</div>'
             '<div class="hero-demo">%s</div>'
             '</div></div></section>') % (
-        cls, eyebrow, ico("trend_down"), h1, lead, ico("search"), "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
+        cls, eyebrow, ico("trend_down"), h1, lead, ico("upload"), ico("upload"), ico("pen"), "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
 
 
 # ---------------- 홈 ----------------

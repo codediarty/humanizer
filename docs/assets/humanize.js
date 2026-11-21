@@ -244,6 +244,16 @@
   }
   if (fileIn) fileIn.addEventListener('change', function (e) { takeFile(e.target.files && e.target.files[0]); e.target.value = ''; });
   var pickB = $('#hzPick'); if (pickB && fileIn) pickB.addEventListener('click', function () { fileIn.click(); });
+  /* 2026.11.21 첫 화면 왼쪽 파일 상자: 누르거나 끌어다 놓으면 아래 도구로 가져와(무료면 바로 검사) 도구 칸으로 내려감. '글 붙여 넣기'는 site.js(data-tool) */
+  var heroUp = document.querySelector('[data-hero-drop]');
+  function toTool() { var tw = document.getElementById('tool') || box; try { tw.scrollIntoView({ behavior: RM ? 'auto' : 'smooth', block: 'start' }); } catch (x) { /* 그대로 */ } }
+  if (heroUp && fileIn) {
+    heroUp.addEventListener('click', function (e) { if (e.target.closest('[data-tool]')) return; e.preventDefault(); S.heroPick = true; fileIn.click(); });
+    ['dragenter', 'dragover'].forEach(function (n) { heroUp.addEventListener(n, function (e) { e.preventDefault(); heroUp.classList.add('over'); }); });
+    ['dragleave', 'dragend'].forEach(function (n) { heroUp.addEventListener(n, function (e) { if (!e.relatedTarget || !heroUp.contains(e.relatedTarget)) heroUp.classList.remove('over'); }); });
+    heroUp.addEventListener('drop', function (e) { e.preventDefault(); heroUp.classList.remove('over'); var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]; if (f) { toTool(); takeFile(f); } });
+    fileIn.addEventListener('change', function () { if (S.heroPick) { S.heroPick = false; toTool(); } });
+  }
   document.addEventListener('click', function (e) {
     var b = e.target.closest('[data-ex]');
     if (b && EX[b.getAttribute('data-ex')]) { e.preventDefault(); collapse(false); S.src = null; renderChip(); ta.value = EX[b.getAttribute('data-ex')]; count(); try { ta.focus({ preventScroll: true }); } catch (x) { ta.focus(); } autoCheck('example'); return; }

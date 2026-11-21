@@ -381,3 +381,18 @@ button{font:inherit;cursor:pointer}
 .logo .lw .en{color:#0c6fe6}
 .ft .logo .lw .en{color:#5fb0ff}
 @media (max-width:760px){.logo .logo-img{height:40px}}
+/* ===== 21:24 첫 화면 왼쪽: 알약 위치를 오른쪽 예시 상자 위와 맞추고, 남는 자리에 파일 올리기 상자 ===== */
+.hero .hero-grid.hg2{align-items:start}
+.hero-up{margin:0 0 20px;padding:18px 18px 16px;border:1.5px dashed #9fd9c0;border-radius:18px;background:rgba(255,255,255,.85);box-shadow:0 1px 2px rgba(15,23,42,.04);cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s}
+.hero-up:hover,.hero-up.over{border-color:var(--brand);background:#fff;box-shadow:0 10px 28px -16px rgba(14,159,110,.45)}
+.hero-up.over{background:var(--brand-l)}
+.hu-h{display:flex;align-items:center;gap:14px}
+.hu-ic{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--brand-l);color:var(--brand-d)}
+.hu-ic .ico{width:22px;height:22px}
+.hu-h p{margin:0;min-width:0}
+.hu-h b{display:block;font-size:16.5px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+.hu-h span{display:block;font-size:13.5px;color:var(--ink-3);margin-top:2px}
+.hu-b{display:flex;gap:8px;margin-top:14px}
+.hu-b .btn{flex:1;padding:13px 16px}
+.hero-up .btn-g{cursor:pointer}
+@media (max-width:1080px){.hero-up{display:none}}
