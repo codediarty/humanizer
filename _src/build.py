@@ -26,7 +26,7 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261121f"
+VER = "20261121g"
 TODAY = "2026-11-21"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -73,9 +73,12 @@ LOGO_SVG = ('<svg viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height
 LOGO_ㅎ = ('<a class="logo" href="/" aria-label="%s 홈">%s<span class="lw"><b>%s</b><span class="en" aria-hidden="true">%s</span></span></a>'
           % (BRAND, LOGO_SVG, BRAND, "".join("<i>%s</i>" % ch for ch in "HUMANIZER")))
 # 2026.11.21 밤 21:21 대표: '로고는 이걸로, 로봇 캐릭터'(준 그림 _src/brand/robot.png → make_brand.py → docs/assets/img/logo-robot.png). 'ㅎ' 표지는 LOGO_ㅎ 로 남겨 둠
-LOGO = ('<a class="logo" href="/" aria-label="%s 홈"><img class="logo-img" src="/assets/img/logo-robot.png" width="45" height="48" alt="" decoding="async">'
+LOGO_ROBOT = ('<a class="logo" href="/" aria-label="%s 홈"><img class="logo-img" src="/assets/img/logo-robot.png" width="45" height="48" alt="" decoding="async">'
         '<span class="lw"><b>%s</b><span class="en" aria-hidden="true">%s</span></span></a>'
         % (BRAND, BRAND, "".join("<i>%s</i>" % ch for ch in "HUMANIZER")))
+# 2026.11.21 22:00 대표: '이걸로 해줘, 적절히 잘 넣어봐'(K 표지 + 한국휴머나이저 / 양옆 줄 HUMANIZER). 표지는 그림(logo-k.png), 글자는 선명하게 HTML 로
+LOGO = ('<a class="logo lk" href="/" aria-label="%s 홈"><img class="logo-k" src="/assets/img/logo-k.png" width="69" height="46" alt="" decoding="async">'
+        '<span class="lw2"><b>%s</b><span class="en2" aria-hidden="true"><i>HUMANIZER</i></span></span></a>' % (BRAND, BRAND))
 
 # 2026.11.21 밤 대표: 카피킬러 · GPT킬러 이름을 대놓고 쓰지 않음(상표 문제 걱정). 메뉴는 일반어로, 두 쪽은 주소 그대로 남김
 NAV = [("ai-humanizer/", "AI 휴머나이저"), ("lower-ai-rate/", "AI 작성률 낮추기"), ("ai-check/", "AI 작성률 검사"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]

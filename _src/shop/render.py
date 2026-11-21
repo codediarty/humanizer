@@ -195,6 +195,22 @@ def guide2_html():
     assert old_brand in h
     return h.replace(old_brand, new_brand)
 
+
+# ---------- 2026.11.21 22:00 대표: 새 로고(K 표지 + 한국휴머나이저 / HUMANIZER)로. 그림 짜임은 그대로 ----------
+FULL = "file://" + os.path.join(os.path.dirname(HERE), "brand", "logo-full.png")
+LOCKUP = '<div class="brand"><img src="%s" alt="" style="height:92px"></div>' % FULL
+LOCKUP_CSS = """
+.brand{position:absolute;left:92px;top:76px}
+"""
+
+
+def guide3_html():
+    h = guide_html()
+    lg = LOGO % (60, 60, "g", "g")
+    old_brand = '<div class="brand">%s<div><b>한국휴머나이저</b><small>KOREA HUMANIZER</small></div></div>' % lg
+    assert old_brand in h
+    return h.replace(old_brand, '<div class="brand"><img src="%s" alt="" style="height:80px"></div>' % FULL)
+
 async def main():
     async with async_playwright() as pw:
         br = await pw.chromium.launch(executable_path="/usr/bin/google-chrome", args=["--allow-file-access-from-files"])
@@ -208,7 +224,7 @@ async def main():
             await pg.screenshot(path=os.path.join(OUT, "hz-%s-1x1.jpg" % p["id"]), type="jpeg", quality=92)
         await pg.set_viewport_size({"width": 1080, "height": 1350})
         f = os.path.join(HERE, "_t_guide.html")
-        open(f, "w").write(guide2_html())
+        open(f, "w").write(guide3_html())
         await pg.goto("file://" + f)
         await pg.evaluate("document.fonts.ready")
         await pg.wait_for_timeout(250)
