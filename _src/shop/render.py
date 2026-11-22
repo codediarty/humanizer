@@ -11,7 +11,7 @@ PACKS = [
     {"id": "lt", "name": "라이트", "tok": "100", "price": "9,900원", "list": "19,800원", "per": "토큰당 99원", "save": "", "badge": ""},
     {"id": "pl", "name": "플러스", "tok": "350", "price": "19,900원", "list": "39,800원", "per": "토큰당 약 57원", "save": "", "badge": ""},
     {"id": "pr", "name": "프로", "tok": "1,000", "price": "39,900원", "list": "79,800원", "per": "토큰당 약 40원", "save": "플러스 대비 토큰당 약 30% 절약", "badge": "BEST 추천"},
-    {"id": "mx", "name": "맥스", "tok": "2,000", "price": "69,900원", "list": "139,800원", "per": "토큰당 약 35원", "save": "플러스 대비 토큰당 약 39% 절약", "badge": "최고 혜택"},
+    {"id": "mx", "name": "맥스", "tok": "2,000", "price": "69,900원", "list": "139,800원", "per": "토큰당 약 34원", "save": "플러스 대비 토큰당 약 40% 절약", "badge": "최고 혜택"},
 ]
 
 LOGO = ('<svg viewBox="0 0 40 40" width="%d" height="%d"><defs><linearGradient id="lg%s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1730"/><stop offset="1" stop-color="#13254a"/></linearGradient></defs>'
