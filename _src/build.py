@@ -26,7 +26,7 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261122e"
+VER = "20261122f"
 TODAY = "2026-11-21"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -96,9 +96,20 @@ def header(path):
             '<nav class="mnav" id="mnav" aria-label="모바일 메뉴">%s<a href="/#tool" data-tool>무료 AI 작성률 검사</a><a href="/about/">회사 소개</a></nav>') % (LOGO, nav, ico("search"), ico("menu"), mnav)
 
 
-def footer():
+# 11.22 대표 '관련 키워드들도 메인 화면 아니더라도 각 사이트 하단에 적혀 있어서 구글 · 네이버 · 빙에 노출되게':
+# 바닥글에 검색어 링크 두 칸(모든 쪽). 한국휴머나이저는 사이트 전체에 검사기 이름을 쓰지 않음(대표 11.21 방침) -> 일반 검색어로만
+FT_SEARCH = [("ai-humanizer/", "AI 휴머나이저"), ("humanizing/", "휴머나이징"), ("lower-ai-rate/", "AI 작성률 낮추기"),
+             ("copykiller/", "표절 검사기 AI 작성률 낮추기"), ("gptkiller/", "GPT 탐지 낮추기"),
+             ("ai-bypass/", "AI 탐지 대비 고쳐 쓰기"), ("free/", "AI 휴머나이저 무료"), ("best-ai-humanizer/", "휴머나이저 추천 · 비교")]
+FT_USE = [("thesis/", "논문 AI 작성률 낮추기"), ("report/", "레포트 AI 작성률 낮추기"), ("resume/", "자소서 AI 작성률 낮추기"), ("natural/", "AI 티 안 나게 바꾸기"),
+          ("ai-converter/", "AI 문장 변환기"), ("ai-check/", "AI 작성률 검사 무료")]
+
+
+def footer(home=False):
     cols = [
-        ("서비스", [("/#tool", "무료 AI 작성률 검사"), ("/#example", "실제 측정 결과"), ("/pricing/", "요금 · 토큰 충전"), ("/faq/", "자주 묻는 질문")]),
+        ("서비스", [("/#tool", "무료 AI 작성률 검사"), ("/results/", "실제 측정 결과"), ("/pricing/", "요금 · 토큰 충전"), ("/faq/", "자주 묻는 질문")]),
+        ("많이 찾는 검색", [("/" + u, t) for u, t in FT_SEARCH]),
+        ("용도별", [("/" + u, t) for u, t in FT_USE]),
         ("가이드", [("/guide/", "휴머나이징 가이드")] + [("/guide/%s/" % g["slug"], g["h1"].split("?")[0].split(",")[0]) for g in P.GUIDES[:5]]),
         ("회사 · 정책", [("/about/", "회사 소개"), ("/terms/", "이용약관"), ("/privacy/", "개인정보처리방침"), ("mailto:" + BIZ["mail"], "문의 " + BIZ["mail"])]),
     ]
@@ -183,7 +194,7 @@ def page(path, title, desc, body, *, ld=None, tool=False, og=None, ptype="websit
                    '<script src="/assets/am.js?v=%s" defer></script>' % VER,
                    '<script src="/assets/textin.js?v=%s" defer></script>' % VER,
                    '<script src="/assets/humanize.js?v=%s" defer></script>' % VER] + scripts
-    doc = "".join(head) + '<body data-root="/">' + '<a class="sr" href="#main">본문 바로가기</a>' + header(path) + '<main id="main">' + body + "</main>" + footer() + "".join(scripts) + "</body></html>"
+    doc = "".join(head) + '<body data-root="/">' + '<a class="sr" href="#main">본문 바로가기</a>' + header(path) + '<main id="main">' + body + "</main>" + footer(path == "") + "".join(scripts) + "</body></html>"
     fp = os.path.join(OUT, path, "index.html") if path else os.path.join(OUT, "index.html")
     if path == "404.html":
         fp = os.path.join(OUT, "404.html")
@@ -482,9 +493,12 @@ def build_static():
 
 
 # ---------------- 하나로 통일(22:20 대표): 키워드별 쪽은 첫 화면으로 바로 넘김 ----------------
-MERGED = {"ai-humanizer/": "/", "lower-ai-rate/": "/", "ai-check/": "/#tool", "copykiller/": "/", "gptkiller/": "/", "ai-bypass/": "/", "free/": "/#tool",
-          "thesis/": "/", "resume/": "/", "natural/": "/", "humanizing/": "/", "best-ai-humanizer/": "/", "ai-converter/": "/", "report/": "/",
-          "results/": "/#example", "humanize/": "/#tool"}
+MERGED_OLD = {"ai-humanizer/": "/", "lower-ai-rate/": "/", "ai-check/": "/#tool", "copykiller/": "/", "gptkiller/": "/", "ai-bypass/": "/", "free/": "/#tool",
+              "thesis/": "/", "resume/": "/", "natural/": "/", "humanizing/": "/", "best-ai-humanizer/": "/", "ai-converter/": "/", "report/": "/",
+              "results/": "/#example", "humanize/": "/#tool"}   # 11.21 22:20 ~ 11.22 판(참고로 남김)
+# 11.22 오후 대표 '노출이 잘되어서 많이 유입되는 게 중요 · 어떤 부분에서든 다 노출': 검색어별 쪽을 다시 엶.
+# 메뉴는 그대로 하나(헷갈리지 않게), 검색어별 쪽은 맨 위에 첫 화면과 같은 도구가 있는 검색 입구. 도구만 있던 humanize/ 만 첫 화면으로 넘김
+MERGED = {"humanize/": "/#tool"}
 
 
 def build_redirects():
@@ -553,7 +567,8 @@ if __name__ == "__main__":
     build_home()
     build_pricing()
     build_faq()
-    build_redirects()   # 22:20 하나로 통일: build_humanize() · build_landings() 대신 첫 화면으로 넘기기
+    build_landings()    # 11.22 오후: 검색어별 쪽 다시(도구가 맨 위, 메뉴는 하나 그대로)
+    build_redirects()   # humanize/ 만 첫 화면으로
     build_guides()
     build_static()
     build_seo()
