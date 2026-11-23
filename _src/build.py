@@ -21,12 +21,13 @@ OUT = os.path.join(ROOT, "docs")
 sys.path.insert(0, HERE)
 from icons import ICONS  # noqa: E402
 import pages as P  # noqa: E402
+import more_kw as MK  # noqa: E402
 
 # ---------------- 설정 ----------------
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261123e"
+VER = "20261123f"
 TODAY = "2026-11-23"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -441,6 +442,7 @@ def build_pricing():
     body = ('<section class="ph"><div class="wrap">%s<h1 class="h1">AI 휴머나이징 가격 · 요금 · 토큰 충전</h1><p class="lead">월 구독 없이 한 번 충전하고 쓴 만큼만 씁니다. 남은 토큰은 기한 없이 쓸 수 있습니다.</p></div></section>'
             '<section class="sec-s"><div class="wrap">%s<p class="price-note">모든 가격은 부가세 포함입니다. 결제는 운영사 성균관컨설팅 결제 페이지에서 가입 없이 카드 · 간편결제로 합니다. 결제하면 보통 1분 안에, 적은 이메일로 16자리 토큰 코드가 갑니다.</p></div></section>') % (crumbs_html(trail), pricing_cards())
     body += P.pricing_detail(ico)
+    body += MK.PRICING_MORE   # 11.23: 요금 쪽만의 구역(사이트마다 다른 글)
     body += '<section class="sec alt"><div class="wrap-n"><h2 class="h2 center">결제 · 토큰 자주 묻는 질문</h2>%s</div></section>' % faq_html(P.PRICE_FAQ)
     body += cta_band("먼저 무료로 검사해 보세요", "AI 작성률이 높게 나온 문장만 휴머나이징하면 토큰을 아낄 수 있습니다.")
     page("pricing/", "AI 휴머나이징 가격 · 요금 · 토큰 충전 | " + BRAND + " AI 휴머나이저", "한국휴머나이저 요금. 라이트 100토큰 9,900원부터 맥스 2,000토큰 69,900원까지. 월 구독 없이 한 번 충전, AI 작성률 검사 무료 · 휴머나이징 1,000자 4토큰.",
