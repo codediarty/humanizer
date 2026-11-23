@@ -26,7 +26,7 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261123d"
+VER = "20261123e"
 TODAY = "2026-11-23"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -463,7 +463,7 @@ def build_landings():
         body = hero_with_tool(L["eyebrow"], L["h1"], L["lead"], L.get("pts"), cls="hero lp-hero")
         body += demo_json()
         body += '<section class="sec-s"><div class="wrap-n">%s<div class="answer">%s</div><div class="prose">%s</div></div></section>' % (crumbs_html(trail), L["answer"], L["body"])
-        body += ('<section class="sec alt"><div class="wrap"><div class="center"><p class="kick">%s실제 엔진으로 잰 결과</p><h2 class="h2">%s</h2><p class="sub">보라색은 AI 패턴이 검출된 문장, 초록색은 AI 패턴을 지운 곳입니다.</p></div>%s</div></section>') % (ico("eye"), L.get("cmp_h", "휴머나이징 전과 후, 직접 비교해 보세요"), compare_block())
+        body += ('<section class="sec alt"><div class="wrap"><div class="center"><p class="kick">%s실제 엔진으로 잰 결과</p><h2 class="h2">%s</h2><p class="sub">보라색은 AI 패턴이 검출된 문장, 초록색은 AI 패턴을 지운 곳입니다.</p></div>%s</div></section>') % (ico("eye"), L.get("cmp_h") or "휴머나이징 전과 후, 직접 비교해 보세요", compare_block())   # 11.23: cmp_h 가 None 인 쪽에 'None' 이 보이던 것 바로잡음
         body += P.how_section(ico)
         body += '<section class="sec"><div class="wrap-n"><h2 class="h2 center">%s 자주 묻는 질문</h2>%s<div class="links" style="margin-top:28px;justify-content:center">%s</div></div></section>' % (
             esc(L["crumb"]), faq_html(L["faq"]), "".join('<a href="/%s">%s</a>' % (u, t) for u, t in L["related"]))
