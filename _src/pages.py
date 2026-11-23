@@ -640,3 +640,10 @@ for _L in LANDINGS:
     if _m:
         _L["body"] = _L["body"] + "\n" + _m["body"]
         _L["faq"] = list(_L["faq"]) + list(_m["faq"])
+
+# 11.23: 가이드 8편에 표 · 점검표를 더함(more_guides.py, Humani 가이드와 겹치던 글을 나눔). 고친 날은 mod 에 둠
+from more_guides import G as _GG  # noqa: E402
+for _g in GUIDES:
+    if _g["slug"] in _GG:
+        _g["body"] = _g["body"] + _GG[_g["slug"]]
+        _g["mod"] = "2026-11-23"
