@@ -27,7 +27,7 @@ import more_kw as MK  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261123j"
+VER = "20261123k"
 TODAY = "2026-11-23"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -352,13 +352,14 @@ REP_LINE = "반복 변환할수록 AI 작성률은 계속 낮아집니다. 여�
 
 
 PLUS_UNIT = 19900 / 350   # 2026.11.22 대표: 카피휴먼처럼 프로 · 맥스는 '플러스 단가로 샀을 때 금액'을 줄 그어 보여 줌(같은 토큰 × 플러스 토큰당 가격)
-PRICE_FN = "절약률은 플러스의 토큰당 가격(약 57원)과 비교한 값이고, 줄 그은 금액은 같은 토큰을 플러스 단가로 샀을 때의 금액입니다."
+LIST_PRICE = {"pr": 60000, "mx": 120000}   # 2026.11.23 22:23 대표: 프로 · 맥스 정가 60,000원 · 120,000원(아임웹 정가와 같게, 줄 그어 보여 줌)
+PRICE_FN = "절약률은 플러스의 토큰당 가격(약 57원)과 비교한 값이고, 줄 그은 금액은 정가입니다."
 
 
 def plus_strike(p):
     if not p.get("save"):
         return ""
-    return '<s title="같은 토큰을 플러스 단가로 샀을 때의 금액"><span class="sr">플러스 단가 기준 </span>%s</s>' % won(int(round(p["tok"] * PLUS_UNIT)))
+    return '<s title="정가"><span class="sr">정가 </span>%s</s>' % won(LIST_PRICE.get(p["id"]) or int(round(p["tok"] * PLUS_UNIT)))
 
 
 def save_badge(p, tag="p", cls="sv2"):
