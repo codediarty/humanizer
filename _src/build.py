@@ -26,8 +26,8 @@ import pages as P  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261122m"
-TODAY = "2026-11-21"
+VER = "20261123a"
+TODAY = "2026-11-23"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
 # 성균관컨설팅(아임웹) 한국휴머나이저 전용 상품 번호. 서버는 스크립트 속성 HZ_IDX 로 같은 번호를 hz1~hz4 로 봄
@@ -98,7 +98,7 @@ def header(path):
 
 # 11.22 대표 '관련 키워드들도 메인 화면 아니더라도 각 사이트 하단에 적혀 있어서 구글 · 네이버 · 빙에 노출되게':
 # 바닥글에 검색어 링크 두 칸(모든 쪽). 한국휴머나이저는 사이트 전체에 검사기 이름을 쓰지 않음(대표 11.21 방침) -> 일반 검색어로만
-FT_SEARCH = [("ai-humanizer/", "AI 휴머나이저"), ("humanizing/", "휴머나이징"), ("lower-ai-rate/", "AI 작성률 낮추기"),
+FT_SEARCH = [("ai-humanizer/", "AI 휴머나이저"), ("humanizing/", "휴머나이징"), ("lower-ai-rate/", "AI 작성률 낮추기"), ("ai-plagiarism/", "AI 표절률 낮추기"),
              ("copykiller/", "표절 검사기 AI 작성률 낮추기"), ("gptkiller/", "GPT 탐지 낮추기"),
              ("ai-bypass/", "AI 탐지 대비 고쳐 쓰기"), ("free/", "AI 휴머나이저 무료"), ("best-ai-humanizer/", "휴머나이저 추천 · 비교")]
 FT_USE = [("thesis/", "논문 AI 작성률 낮추기"), ("report/", "레포트 AI 작성률 낮추기"), ("resume/", "자소서 AI 작성률 낮추기"), ("natural/", "AI 티 안 나게 바꾸기"),
@@ -384,7 +384,7 @@ def pricing_cards(cta_text="충전하기"):
     return '<div class="price price2">' + "".join(out) + "</div>" + '<p class="price-rep">%s</p>' % REP_LINE + '<p class="price-fn">%s</p>' % PRICE_FN   # 2026.11.22 대표(AIMarker 13.31 과 같게)
 
 
-def cta_band(h="제출 버튼을 누르기 전, 30초면 충분합니다", p="지금 가진 글의 AI 작성률부터 무료로 확인하세요. 가입도, 카드 등록도 필요 없습니다."):
+def cta_band(h="제출 버튼을 누르기 전, 30초면 됩니다", p="지금 가진 글의 AI 작성률부터 무료로 확인하세요. 가입도, 카드 등록도 필요 없습니다."):
     return ('<section class="sec-s"><div class="wrap"><div class="cta rv"><h2>%s</h2><p>%s</p><div class="btns"><a class="btn btn-p btn-l" href="/#tool" data-tool>%s무료로 AI 작성률 검사</a>'
             '<a class="btn btn-g btn-l" href="/pricing/">요금 보기</a></div></div></div></section>') % (h, p, ico("search"))
 
