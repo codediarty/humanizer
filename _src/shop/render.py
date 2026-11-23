@@ -215,20 +215,31 @@ def guide3_html():
     assert "</style>" in h
     return h.replace("</style>", fix + "</style>", 1)
 
+# 2026.11.23 22:48 대표 '응 맞춰줘'(사이트를 로고 남색으로 바꾼 것에 맞춰 상품 그림 · 이용 안내 그림도): 초록을 남색 · 파랑으로 덮어씀(위 틀은 그대로 둠)
+NAVY_THUMB = (".card{background:radial-gradient(120%% 140%% at 100%% 100%%,#1d6fe0 0%%,rgba(29,111,224,0) 46%%),linear-gradient(135deg,#0a1530 0%%,#0d2346 52%%,#0b3d91 100%%)}"
+              ".pill.n{background:#1d6fe0;color:#fff}.dom{color:#0b3d91}").replace("%%", "%")
+NAVY_GUIDE = ("body{background:radial-gradient(70%% 50%% at 100%% 0%%,rgba(29,111,224,.14),transparent 70%%),#f6f8fb}"
+              ".n{background:#0b3d91}h3 em{color:#0b3d91}.ft b{color:#0b3d91}").replace("%%", "%")
+
+
+def navy(h, css):
+    assert "</style>" in h
+    return h.replace("</style>", css + "</style>", 1)
+
 async def main():
     async with async_playwright() as pw:
         br = await pw.chromium.launch(executable_path="/usr/bin/google-chrome", args=["--allow-file-access-from-files"])
         pg = await br.new_page(viewport={"width": 1200, "height": 1200}, device_scale_factor=1)
         for p in PACKS:
             f = os.path.join(HERE, "_t_%s.html" % p["id"])
-            open(f, "w").write(thumb2_html(p))
+            open(f, "w").write(navy(thumb2_html(p), NAVY_THUMB))
             await pg.goto("file://" + f)
             await pg.evaluate("document.fonts.ready")
             await pg.wait_for_timeout(250)
             await pg.screenshot(path=os.path.join(OUT, "hz-%s-1x1.jpg" % p["id"]), type="jpeg", quality=92)
         await pg.set_viewport_size({"width": 1080, "height": 1350})
         f = os.path.join(HERE, "_t_guide.html")
-        open(f, "w").write(guide3_html())
+        open(f, "w").write(navy(guide3_html(), NAVY_GUIDE))
         await pg.goto("file://" + f)
         await pg.evaluate("document.fonts.ready")
         await pg.wait_for_timeout(250)

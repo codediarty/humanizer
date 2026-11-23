@@ -17,12 +17,13 @@ h1{position:absolute;left:76px;top:196px;font-size:64px;line-height:1.17;font-we
 p{position:absolute;left:78px;top:380px;font-size:25px;line-height:1.55;color:#475569;font-weight:500}
 .chips{position:absolute;left:78px;bottom:66px;display:flex;gap:12px}
 .chips span{height:46px;padding:0 20px;border-radius:23px;display:flex;align-items:center;font-size:21px;font-weight:700;border:1.5px solid #cbd5e1;color:#334155;background:#fff}
-.chips span:first-child{background:#0e9f6e;border-color:#0e9f6e;color:#fff}
+.chips span:first-child{background:#0b3d91;border-color:#0b3d91;color:#fff}
 .k{position:absolute;right:70px;top:150px;height:330px}
+.k{right:52px;top:162px;height:296px}h1{font-size:60px}
 </style></head><body>
 <img class="lg" src="%s" alt="">
-<h1>AI 작성률은 낮추고,<br>원문의 의미는 그대로.</h1>
-<p>킬러에서 검출되는 AI 패턴을 분석해 문장을 바꾸는<br>한국어 전용 휴머나이징 서비스</p>
+<h1>AI 작성률은 낮추고,<br>문장의 완성도는 높이고.</h1>
+<p>AI 탐지기가 감지하는 AI 작성률 패턴은 줄이고,<br>원문의 의미는 그대로 유지합니다.</p>
 <div class="chips"><span>무료 AI 작성률 검사</span><span>한글 · 워드 · PDF</span></div>
 <img class="k" src="%s" alt="">
 </body></html>"""
