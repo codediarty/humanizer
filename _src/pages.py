@@ -631,3 +631,12 @@ def llms_full(site, packs):
     for g in GUIDES:
         out.append("## " + g["h1"] + "\n" + _re.sub(r"<[^>]+>", "", g["answer"]) + "\n" + _re.sub(r"<[^>]+>", " ", g["body"]) + "\n")
     return "\n".join(out)
+
+
+# 11.23 3차: 검색어 쪽마다 고유 내용 더함(more_kw.py). 기존 글은 그대로 두고 뒤에 덧붙임
+from more_kw import MORE as _MORE  # noqa: E402
+for _L in LANDINGS:
+    _m = _MORE.get(_L["path"])
+    if _m:
+        _L["body"] = _L["body"] + "\n" + _m["body"]
+        _L["faq"] = list(_L["faq"]) + list(_m["faq"])
