@@ -446,3 +446,9 @@ button{font:inherit;cursor:pointer}
 
 /* 2026.11.22 대표: 카피휴먼처럼 프로 · 맥스에 플러스 단가 기준 금액(줄 그음) + 절약 배지 */
 .pk .pr2 s{font-size:14.5px;font-weight:600;color:var(--ink-3);text-decoration-thickness:1.5px;font-variant-numeric:tabular-nums}.pk .pr2 span{flex-basis:100%}.pk .sv2 b{font-weight:900}.pk.best .sv2{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 8px 22px -12px var(--brand)}.price-fn{text-align:center;margin:10px auto 0;max-width:760px;font-size:13px;line-height:1.6;color:var(--ink-3)}.sr{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* 11.23 휴대폰 머리줄: 뒤에 있는 좁은 노트북 규칙(1240px)이 휴대폰 로고 크기 · 간격을 덮어 360px 화면에서 옆으로 17px 넘치던 것 바로잡기(원래 정한 휴대폰 값을 다시) */
+@media (max-width:760px){.hd-in{gap:10px}.logo .logo-k{height:38px}.logo .lw2 b{font-size:19px}.logo .lw2 .en2{font-size:9px;gap:5px;margin-top:5px}}
+@media (max-width:520px){.hd-in{gap:6px}.logo .logo-k{height:31px}.logo .lw2 b{font-size:16.5px}.logo .lw2 .en2{font-size:7.5px;gap:4px;margin-top:4px}}
+@media (max-width:360px){.logo .logo-k{height:27px}.logo .lw2 b{font-size:15px}.logo .lw2 .en2{font-size:7px}}
+@media (max-width:340px){.hd-r{gap:4px}.hd-r .btn-p{padding:8px 9px;font-size:13px}.logo .logo-k{height:24px}.logo .lw2 b{font-size:14px}}

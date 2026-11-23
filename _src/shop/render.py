@@ -88,7 +88,7 @@ body{width:1200px;height:1200px;background:#fff;position:relative;overflow:hidde
  <div class="price"><del>정가 %s</del><div class="row"><span class="off">50%%</span><b>%s</b></div></div>
 </div>
 <div class="ttl">AI 작성률 낮추기 · AI 휴머나이징<br>(AI 글 인간화) 토큰</div>
-<div class="sub">월 구독 없이 한 번 충전 · 쓴 만큼 차감 · 기한 무제한<br>검사 무료 · 휴머나이징 1,000자 4토큰</div>
+<div class="sub">월 구독 없이 한 번 충전 · 쓴 만큼 차감 · 기한 무제한<br>검사 무료 · 휴머나이징 1,000자 6토큰</div>
 <div class="dom">humanizer.co.kr</div>
 </body></html>""" % (BASE_CSS, 168 if small else 196, lg, GLYPH, badge, p["name"], p["per"], p["tok"], save, p["list"], p["price"])
 
@@ -96,7 +96,7 @@ body{width:1200px;height:1200px;background:#fff;position:relative;overflow:hidde
 GUIDE_STEPS = [
     ("메일로 토큰 코드가 갑니다", "결제가 확인되면 보통 1분 안에 주문서의 이메일로 보내 드립니다. 보내는 이름은 '한국휴머나이저'이고, 메일이 안 보이면 스팸함도 확인해 주세요."),
     ("메일의 <em>바로 이어서 하기</em>를 누르면 끝", "코드가 저절로 들어간 채로 열립니다. 다른 기기에서는 위쪽 '토큰 코드'에 코드를 넣으면 됩니다."),
-    ("쓴 만큼만 빠집니다", "검사 요약은 0토큰, 전체 결과는 1,000자 2토큰, 휴머나이징은 1,000자 4토큰. 남은 토큰은 위쪽 토큰 단추에서 봅니다."),
+    ("쓴 만큼만 빠집니다", "검사 요약은 0토큰, 전체 결과는 1,000자 3토큰, 휴머나이징은 1,000자 6토큰. 남은 토큰은 위쪽 토큰 단추에서 봅니다."),
     ("남은 토큰은 이어서 씁니다", "기한 없이, 같은 코드에 더 충전할 수 있고 여러 기기에서 같은 코드를 씁니다. 코드를 아는 사람은 누구나 쓸 수 있으니 잘 보관해 주세요."),
 ]
 
@@ -179,7 +179,7 @@ body{width:1200px;height:1200px;background:#fff;position:relative;overflow:hidde
  <div class="price">%s</div>
 </div>
 <div class="ttl">AI 작성률 낮추기 · AI 휴머나이징<br>(AI 글 인간화) 서비스 토큰</div>
-<div class="sub">월 구독 없이 한 번 충전 · 쓴 만큼 차감 · 기한 무제한<br>검사 무료 · 휴머나이징 1,000자 4토큰</div>
+<div class="sub">월 구독 없이 한 번 충전 · 쓴 만큼 차감 · 기한 무제한<br>검사 무료 · 휴머나이징 1,000자 6토큰</div>
 <div class="dom">humanizer.co.kr</div>
 </body></html>""" % (BASE_CSS, LOCKUP_CSS, 168 if small else 196, LOCKUP, badge, p["name"], p["per"], p["tok"], save, p["price"])
 
@@ -210,7 +210,7 @@ def guide3_html():
     old_brand = '<div class="brand">%s<div><b>한국휴머나이저</b><small>KOREA HUMANIZER</small></div></div>' % lg
     assert old_brand in h
     h = h.replace(old_brand, '<div class="brand"><img src="%s" alt="" style="height:80px"></div>' % FULL)
-    # 2026.11.22 새 단가(전체 결과 1,000자 2토큰 · 휴머나이징 4토큰)로 다시 그릴 때, 넷째 칸이 바닥글 선에 닿던 것 바로잡음
+    # 2026.11.22 새 단가(전체 결과 1,000자 3토큰 · 휴머나이징 4토큰)로 다시 그릴 때, 넷째 칸이 바닥글 선에 닿던 것 바로잡음
     fix = ".list{top:376px;gap:18px}.st{padding:27px 32px}"
     assert "</style>" in h
     return h.replace("</style>", fix + "</style>", 1)
