@@ -210,7 +210,7 @@ def guide3_html():
     old_brand = '<div class="brand">%s<div><b>한국휴머나이저</b><small>KOREA HUMANIZER</small></div></div>' % lg
     assert old_brand in h
     h = h.replace(old_brand, '<div class="brand"><img src="%s" alt="" style="height:80px"></div>' % FULL)
-    # 2026.11.22 새 단가(전체 결과 1,000자 3토큰 · 휴머나이징 4토큰)로 다시 그릴 때, 넷째 칸이 바닥글 선에 닿던 것 바로잡음
+    # 2026.11.22 새 단가(전체 결과 1,000자 2토큰 · 휴머나이징 4토큰)로 다시 그릴 때, 넷째 칸이 바닥글 선에 닿던 것 바로잡음
     fix = ".list{top:376px;gap:18px}.st{padding:27px 32px}"
     assert "</style>" in h
     return h.replace("</style>", fix + "</style>", 1)
