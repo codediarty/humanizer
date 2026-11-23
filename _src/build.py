@@ -27,7 +27,7 @@ import more_kw as MK  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261123k"
+VER = "20261123l"
 TODAY = "2026-11-23"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -85,7 +85,7 @@ LOGO = ('<a class="logo lk" href="/" aria-label="%s 홈"><img class="logo-k" src
 NAV_3 = [("ai-humanizer/", "AI 휴머나이저"), ("lower-ai-rate/", "AI 작성률 낮추기"), ("ai-check/", "AI 작성률 검사"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]
 # 22:18 대표: 위에 셋(AI 휴머나이저 · AI 작성률 낮추기 · AI 작성률 검사)이 있으니 헷갈림, 'AI 휴머나이저(AI 작성률 낮추기)' 하나로 통일. 두 쪽은 바닥글 · 관련 링크로 그대로 닿음
 # 22:20 대표: '1개로 통일해서 만들어줘, 그래야 헷갈리지 않고 결제 유도' -> 키워드별 쪽은 첫 화면으로 바로 넘기고(build_redirects), 메뉴도 첫 화면 하나로
-NAV = [("", "AI 휴머나이저<small>(AI 작성률 낮추기)</small>"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]
+NAV = [("", "AI 작성률 낮추기"), ("pricing/", "요금"), ("guide/", "가이드"), ("faq/", "자주 묻는 질문")]   # 2026.11.23 21:42 대표: 'AI 휴머나이저(AI 작성률 낮추기)' → 'AI 작성률 낮추기'
 
 
 def header(path):
@@ -398,10 +398,10 @@ def crumbs_html(trail):
 def hero_with_tool(eyebrow, h1, lead, pts=None, cls="hero"):
     """2026.11.21 밤(대표: '좌측은 너무 길어서 잘리고 우측은 공간이 남아'): 첫 화면은 왼쪽 글 + 오른쪽 예시를 같은 높이로 맞추고,
     검사 도구는 그 바로 아래 넓은 칸으로(id="tool" 그대로라 '무료 검사' 단추 · 모바일 고정 단추가 그대로 씀). 모바일은 글 → 도구 → 예시"""
-    pts = pts or ["한국어 전용 엔진", "문장 단위 AI 작성률", "한글 · 워드 · PDF 그대로"]   # 2026.11.21 21:24 대표: 파일 보호 문구는 자주 묻는 질문으로
+    pts = pts or ["한국어 특화 분석", "문장별 AI 작성률 확인", "다양한 문서 형식 지원"]   # 2026.11.23 21:41 대표 문구   # 2026.11.21 21:24 대표: 파일 보호 문구는 자주 묻는 질문으로
     return ('<section class="%s" id="top"><div class="wrap"><div class="hero-grid hg2">'
             '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-2"><b>%s</b>AI 작성률 낮추기</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
-            '<div class="hero-up" data-hero-drop><div class="hu-h"><span class="hu-ic">%s</span><p><b>파일을 올리면 AI 작성률을 바로 검사합니다</b><span>한글(HWP · HWPX) · 워드(DOCX) · PDF · 텍스트, 끌어다 놓아도 됩니다</span></p></div>'
+            '<div class="hero-up" data-hero-drop><div class="hu-h"><span class="hu-ic">%s</span><p><b>내 문서 AI 작성률, 무료로 확인하세요.</b><span>한글(HWP · HWPX) · 워드(DOCX) · PDF · 텍스트, 끌어다 놓아도 됩니다</span></p></div>'
             '<div class="hu-b"><button class="btn btn-p" type="button" data-hero-pick>%s파일 올리기</button><a class="btn btn-g" href="#tool" data-tool>%s글 붙여 넣기</a></div></div>'
             '<ul class="hero-pts">%s</ul></div>'
             '<div id="tool" class="tool-w hero-tool">%s</div>'

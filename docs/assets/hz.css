@@ -481,3 +481,39 @@ html body .hz7-dlg-b .hz19-auto .ico { margin-top: 2px; padding: 2px; border-rad
   html body .hz7-dlg.hz18-dlg .hz18-packs label.sm span { padding: 9px 12px 8px; }
   html body .hz7-dlg.hz18-dlg .hz18-packs label.sm .tk { font-size: 18px; }
 }
+
+/* 13.34(2026.11.23 21:41 대표 '전체적으로 가벼워 보여, 가벼운 초록색도 그렇고 더 신뢰감 있게'): 로고(K 표지)의 남색 · 파랑으로 바탕색을 바꾸고,
+   점선 · 연한 초록을 걷어 내 단단하게. 안전 · 절약 같은 뜻을 가진 초록(--ok)은 그대로. 예전 규칙은 지우지 않고 뒤에서 덮어씀 */
+:root{
+  --brand:#0b3d91;--brand-d:#082e6e;--brand-l:#edf2fb;--brand-ink:#0a2f6e;--navy:#0a1a3a;--navy-2:#10275a;
+  --k-blue:#0b3d91;--ds-blue-600:#0b3d91;--ds-blue-700:#082e6e;--ds-blue-500:#1652b8;--ds-blue-300:#9db6e4;--ds-blue-200:#c3d3ef;--ds-blue-100:#dbe5f6;--ds-blue-50:#edf2fb;
+}
+.btn-p{box-shadow:0 10px 22px -12px rgba(11,61,145,.6)}
+.btn-p:hover{background:var(--brand-d)}
+.hd{background:rgba(255,255,255,.96);border-bottom:1px solid #e4e9f2}
+.nav a[aria-current="page"]{background:transparent;color:var(--ink)}
+.nav a:hover{background:var(--soft);color:var(--ink)}
+.hero{background:radial-gradient(900px 440px at 82% -8%,rgba(11,61,145,.09),transparent 65%),linear-gradient(180deg,#f8fafd 0%,#eef2f9 100%)}
+.hero::before{opacity:.4}
+.hero .h1{color:var(--navy)}
+.h1 em{background:linear-gradient(90deg,#0b3d91 0%,#1d6fe0 100%);-webkit-background-clip:text;background-clip:text}
+.eyebrow{border-color:#d9e1ee;box-shadow:0 1px 2px rgba(15,23,42,.05)}
+.eyebrow b{background:var(--brand)}
+.eyebrow .eb-t{padding-left:4px}
+.eyebrow em{font-style:normal;color:var(--brand)}
+.hero-pts .ico{color:var(--brand)}
+.hero-up{border:1px solid #d3dcec;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 34px -22px rgba(11,61,145,.32)}
+.hero-up:hover,.hero-up.over{border-color:var(--brand);background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.05),0 18px 40px -20px rgba(11,61,145,.42)}
+.hero-up.over{background:var(--brand-l)}
+.hu-ic{background:var(--brand-l);color:var(--brand)}
+.kick{color:var(--brand)}
+.demo-legend .h i{background:rgba(29,111,224,.16);border-bottom:2px solid var(--brand)}
+.x.ins,.hu-blk mark,.cmp-t mark{color:var(--brand-ink);background:rgba(29,111,224,.14);animation:pop2 .35s ease}
+@keyframes pop2{0%{background:rgba(29,111,224,.42)}100%{background:rgba(29,111,224,.14)}}
+.sec.dark{background:radial-gradient(900px 400px at 82% 0%,rgba(29,111,224,.26),transparent 60%),radial-gradient(800px 420px at 0% 100%,rgba(11,61,145,.4),transparent 60%),var(--navy)}
+.dark .kick{color:#8fb3ff}
+.flow .k{background:var(--brand-l);border-color:#c3d3ef;color:var(--brand-ink)}
+.pk.best{box-shadow:0 24px 50px -24px rgba(11,61,145,.45)}
+.pk2.best{box-shadow:0 18px 40px -22px rgba(11,61,145,.45)}
+.cta{background:radial-gradient(700px 300px at 18% 0%,rgba(29,111,224,.34),transparent 60%),radial-gradient(700px 300px at 92% 100%,rgba(11,61,145,.5),transparent 60%),var(--navy)}
+.ft .logo .lw .en{color:#8fb3ff}
