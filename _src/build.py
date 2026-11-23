@@ -27,7 +27,7 @@ import more_kw as MK  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261123f"
+VER = "20261123g"
 TODAY = "2026-11-23"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -479,6 +479,7 @@ def build_guides():
     cards = "".join('<a class="gcard rv" href="/guide/%s/"><small>%s</small><h3>%s</h3><p>%s</p></a>' % (g["slug"], g["cat"], esc(g["h1"]), esc(g["desc"])) for g in P.GUIDES)
     body = ('<section class="ph"><div class="wrap">%s<h1 class="h1">휴머나이징 가이드</h1><p class="lead">AI 탐지기가 무엇을 보고 AI 작성률을 매기는지, 어떻게 하면 AI 티가 나지 않는 글이 되는지 정리했습니다.</p></div></section>'
             '<section class="sec-s"><div class="wrap"><div class="gcards">%s</div></div></section>') % (crumbs_html(trail0), cards)
+    body += MK.GUIDE_HUB   # 11.23: 가이드 모음 쪽만의 읽는 순서 · 쓰는 방식
     body += cta_band()
     page("guide/", "휴머나이징 가이드 · AI 작성률 낮추는 법 | " + BRAND, "AI 작성률 0%와 20% 미만, GPT 탐지 안 걸리는 법, AI 탐지기 원리, AI 패턴 8가지, 챗GPT 티 안 나게 쓰는 법까지 정리한 휴머나이징 가이드.",
          body, ld=[ld_crumbs(trail0), {"@type": "CollectionPage", "name": BRAND + " 휴머나이징 가이드", "url": SITE + "/guide/"}], priority="0.8")

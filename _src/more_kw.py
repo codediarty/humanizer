@@ -410,3 +410,15 @@ PRICING_MORE = ('<section class="sec-s"><div class="wrap-n prose"><h2>글 분량
         ["여러 사람의 글을 맡아 다듬는 경우", "1,000토큰 넘게", "맥스(2,000토큰)"],
     ])
     + "<p>분량은 예시입니다. 실제로 빠질 토큰은 휴머나이징을 누르기 전에 화면에 먼저 보여 드립니다. 검사는 무료이고, 걸린 문단만 넣으면 그만큼만 빠집니다.</p></div></section>")
+
+
+# ---- 11.23: 가이드 모음 쪽(/guide/) 고유 구역 ----
+GUIDE_HUB = ('<section class="sec-s"><div class="wrap-n prose"><h2>상황마다 먼저 읽을 글</h2>'
+    + T(["지금 상황", "먼저 읽을 글", "이어서"], [
+        ["검사 결과가 높게 나왔다", '<a href="/guide/ai-patterns/">AI 패턴 8가지</a>', '<a href="/guide/copykiller-under-20/">AI 작성률 20% 미만 만드는 법</a>'],
+        ["0%까지 내리고 싶다", '<a href="/guide/copykiller-ai-rate-0/">AI 작성률 0% 가능할까</a>', '<a href="/lower-ai-rate/">AI 작성률 낮추기</a>'],
+        ["챗GPT 초안을 다듬는다", '<a href="/guide/chatgpt-tone/">챗GPT 티 안 나게 쓰는 법</a>', '<a href="/guide/gptkiller-tips/">GPT 탐지 안 걸리는 법</a>'],
+        ["직접 쓴 글이 의심받았다", '<a href="/guide/how-ai-detectors-work/">AI 탐지기는 어떻게 AI 글을 잡을까</a>', '<a href="/ai-check/">AI 작성률 검사</a>'],
+        ["논문이나 자소서를 낸다", '<a href="/guide/thesis-checklist/">논문 제출 전 체크리스트</a>', '<a href="/guide/resume-ai/">자소서 AI 작성률 낮추는 법</a>'],
+    ])
+    + "<h2>가이드를 이렇게 씁니다</h2><p>한국휴머나이저 편집팀은 같은 기준으로 다시 잴 수 있는 내용만 씁니다. 예문은 설명을 위해 만든 글임을 밝히고, 검사기마다 기준이 달라 숫자가 다를 수 있다는 점을 함께 적습니다. 글을 고치면 고친 날을 새로 적습니다.</p></div></section>")
