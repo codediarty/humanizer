@@ -34,6 +34,7 @@ SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
 # 성균관컨설팅(아임웹) 한국휴머나이저 전용 상품 번호. 서버는 스크립트 속성 HZ_IDX 로 같은 번호를 hz1~hz4 로 봄
 SHOP_IDX = {"lt": "157", "pl": "156", "pr": "154", "mx": "155"}   # 2026.11.21 등록(아임웹 상품 157 라이트 · 156 플러스 · 154 프로 · 155 맥스)
 NAVER_VERIFY = "b9336f93109b341c58fdb3bc67c0d75075d632d1"   # 2026.11.21 네이버 서치어드바이저 소유확인(HTML 태그)
+NAVER_VERIFY2 = "4023a15ad79f9ad14c934b8e14835d53c81e6e59"   # 2026.11.24 대표 네이버 서치어드바이저 계정에 새로 등록한 소유확인(HTML 태그). 예전 값도 그대로 둠
 GOOGLE_VERIFY = ""
 BING_VERIFY = "6CFE39150A28BBBB4694B507E2E689C0"   # 2026.11.21 Bing 웹마스터 도구 소유확인(HTML 메타 태그)
 INDEXNOW_KEY = "7d3f2a9c4b1e48f6a05c9e2d1b7f3a64"
@@ -176,6 +177,8 @@ def page(path, title, desc, body, *, ld=None, tool=False, og=None, ptype="websit
             '<link rel="alternate" type="application/rss+xml" title="%s 가이드" href="/rss.xml">' % BRAND]
     if NAVER_VERIFY:
         head.append('<meta name="naver-site-verification" content="%s">' % NAVER_VERIFY)
+    if NAVER_VERIFY2:
+        head.append('<meta name="naver-site-verification" content="%s">' % NAVER_VERIFY2)
     if GOOGLE_VERIFY:
         head.append('<meta name="google-site-verification" content="%s">' % GOOGLE_VERIFY)
     if BING_VERIFY:
