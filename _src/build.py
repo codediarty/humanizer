@@ -27,7 +27,7 @@ import more_kw as MK  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261124c"
+VER = "20261124d"
 TODAY = "2026-11-24"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -283,6 +283,14 @@ def _sent_ops(src, dst):
     return per
 
 
+BAND_LABEL = {"부적합": "AI 작성률 높음"}   # 2026.11.24 대표: 예시 화면에서 '부적합' → 'AI 작성률 높음'(엔진 원값 demo.json 은 그대로)
+DEMO_MEASURED = "한국휴머나이저 HUM 2.5 엔진의 자체 측정 결과입니다. 문서의 특성에 따라 감소율은 달라질 수 있으며, 반복 휴머나이징을 통해 추가적인 개선을 시도할 수 있습니다."   # 2026.11.24 20:47 대표 전 → 후(예전 문구는 demo.json measured)
+
+
+def _band(b):
+    return BAND_LABEL.get(b, b)
+
+
 def demo_samples():
     out = []
     for S in DEMO["samples"]:
@@ -306,14 +314,14 @@ def demo_samples():
             anim.append('<span class="s%s">%s%s</span> ' % (" ai" if isai else "", A_.rstrip(), tag))
             src.append('<span class="s%s">%s%s</span> ' % (" ai" if isai else "", S_.rstrip(), tag.replace("demo-tag", "demo-tag st")))
             dst.append('<span class="s%s">%s%s</span> ' % (" hu" if n else "", D_.rstrip(), okt))
-        out.append({"k": S["k"], "label": S["label"], "file": S["file"], "before": S["before"], "after": S["after"], "changes": nch,
+        out.append({"k": S["k"], "label": S["label"], "file": S["file"], "before": dict(S["before"], band=_band(S["before"]["band"])), "after": dict(S["after"], band=_band(S["after"]["band"])), "changes": nch,
                     "doc": '<p class="ai-blk">' + "".join(anim).strip() + "</p>",
                     "src": '<p class="ai-blk">' + "".join(src).strip() + "</p>", "dst": '<p class="hu-blk">' + "".join(dst).strip() + "</p>"})
     return out
 
 
 def demo_json():
-    return '<script type="application/json" id="hzDemoData">%s</script>' % json.dumps({"samples": demo_samples(), "measured": DEMO["measured"]}, ensure_ascii=False).replace("</", "<\\/")
+    return '<script type="application/json" id="hzDemoData">%s</script>' % json.dumps({"samples": demo_samples(), "measured": DEMO_MEASURED}, ensure_ascii=False).replace("</", "<\\/")
 
 
 def demo_card():
@@ -323,16 +331,16 @@ def demo_card():
     return ('<div class="demo" id="demo" aria-label="AI 작성률 검사와 휴머나이징 예시(실제 엔진 값)">'
             '<div class="demo-bar"><i></i><i></i><i></i><span class="fn">%s<span>%s</span></span><div class="demo-tabs" role="tablist" aria-label="예시 글 종류">%s</div></div>'
             '<div class="demo-scan" aria-hidden="true"></div>'
-            '<div class="demo-meter"><div class="dm from bad"><small>휴머나이징 전 · AI작성률</small><b>%s<small style="font-size:18px">%%</small> <em>%s</em></b><div class="dm-bar"><i style="width:%s%%"></i></div></div>'
+            '<div class="demo-meter"><div class="dm from bad"><small>휴머나이징 전 AI 작성률</small><b>%s<small style="font-size:18px">%%</small> <em>%s</em></b><div class="dm-bar"><i style="width:%s%%"></i></div></div>'
             '<span class="dm-arr" aria-hidden="true">%s</span>'
-            '<div class="dm to good wait"><small>휴머나이징 후 · AI작성률</small><b>– <em>대기</em></b><div class="dm-bar"><i style="width:0"></i></div></div></div>'
-            '<div class="demo-legend"><span class="a"><i></i>AI 패턴 검출 문장</span><span class="h"><i></i>AI 패턴을 지운 곳</span><span class="demo-state" aria-live="polite"></span></div>'
+            '<div class="dm to good wait"><small>휴머나이징 후 AI 작성률</small><b>– <em>대기</em></b><div class="dm-bar"><i style="width:0"></i></div></div></div>'
+            '<div class="demo-legend"><span class="a"><i></i>AI 패턴 감지 문장</span><span class="h"><i></i>AI 패턴 개선 문장</span><span class="demo-state" aria-live="polite"></span></div>'
             '<div class="demo-doc">%s</div>'
             # 2026.11.21 밤 대표: '휴머나이징 보기 · 처음부터 다시'(예시 재생) 대신 실제 흐름으로: 휴머나이징 하기(내 글 인간화) → 이 글 맞춤 충전 → 결제 후 이어서
-            '<div class="demo-ft"><a class="btn btn-p btn-s demo-go" href="#tool" data-hum-go>%s<span>휴머나이징 하기</span><em>내 글 인간화</em></a>'
-            '<a class="btn btn-g btn-s" href="#tool" data-tool>무료 검사</a><span class="note">%s</span></div></div>') % (
+            '<div class="demo-ft"><a class="btn btn-p btn-s demo-go" href="#tool" data-hum-go>%s<span>AI 작성률 낮추기</span></a>'
+            '<a class="btn btn-p btn-s demo-free" href="#tool" data-tool>무료 AI 작성률 검사</a><span class="note">%s</span></div></div>') % (
         ico("file"), esc(first["file"]), tabs, first["before"]["rate"], first["before"]["band"], first["before"]["rate"], ico("arrow"),
-        first["doc"], ico("sparkle"), esc(DEMO["measured"]))
+        first["doc"], ico("trend_down"), esc(DEMO_MEASURED))
 
 
 def compare_block():
@@ -341,7 +349,7 @@ def compare_block():
     return ('<div class="cmp-tabs" role="tablist" aria-label="예시 글 종류">%s</div><div class="cmp" id="cmp">'
             '<div class="cmp-col"><div class="cmp-h"><span>휴머나이징 전</span><span class="pill l bad"></span></div><div class="cmp-t l"></div></div>'
             '<div class="cmp-col"><div class="cmp-h"><span>휴머나이징 후</span><span class="pill r good"></span></div><div class="cmp-t r"></div></div></div>'
-            '<div class="cmp-foot"></div><p class="center" style="font-size:13px;color:var(--ink-3);margin-top:10px">%s</p>') % (tabs, esc(DEMO["measured"]))
+            '<div class="cmp-foot"></div><p class="center" style="font-size:13px;color:var(--ink-3);margin-top:10px">%s</p>') % (tabs, esc(DEMO_MEASURED))
 
 
 def faq_html(faq):
@@ -398,16 +406,19 @@ def crumbs_html(trail):
 def hero_with_tool(eyebrow, h1, lead, pts=None, cls="hero"):
     """2026.11.21 밤(대표: '좌측은 너무 길어서 잘리고 우측은 공간이 남아'): 첫 화면은 왼쪽 글 + 오른쪽 예시를 같은 높이로 맞추고,
     검사 도구는 그 바로 아래 넓은 칸으로(id="tool" 그대로라 '무료 검사' 단추 · 모바일 고정 단추가 그대로 씀). 모바일은 글 → 도구 → 예시"""
-    pts = pts or ["한국어 특화 분석", "문장별 AI 작성률 확인", "다양한 문서 형식 지원"]   # 2026.11.23 21:41 대표 문구   # 2026.11.21 21:24 대표: 파일 보호 문구는 자주 묻는 질문으로
+    pts = pts or ["한국어 특화 휴머나이징", "문장 단위 AI 패턴 분석", "변환 전후 작성률 비교"]   # 2026.11.24 20:47 대표 전 → 후(예전 11.23 21:41: 한국어 특화 분석 · 문장별 AI 작성률 확인 · 다양한 문서 형식 지원)   # 2026.11.21 21:24 대표: 파일 보호 문구는 자주 묻는 질문으로
     return ('<section class="%s" id="top"><div class="wrap"><div class="hero-grid hg2">'
-            '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-2"><b>%s</b>AI 작성률 낮추기</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
-            '<div class="hero-up" data-hero-drop><div class="hu-h"><span class="hu-ic">%s</span><p><b>내 문서 AI 작성률, 무료로 확인하세요.</b><span>한글(HWP · HWPX) · 워드(DOCX) · PDF · 텍스트, 끌어다 놓아도 됩니다</span></p></div>'
-            '<div class="hu-b"><button class="btn btn-p" type="button" data-hero-pick>%s파일 올리기</button><a class="btn btn-g" href="#tool" data-tool>%s글 붙여 넣기</a></div></div>'
+            '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-2"><b>%s</b>AI 작성률 감소 전문 솔루션</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
+            '<div class="hero-up hu2" data-hero-drop><div class="hu-h"><span class="hu-ic">%s</span><p><b>지금 내 문서의 AI 작성률을 확인하세요.</b><span>한글(HWP, HWPX), 워드(DOCX), PDF, TXT 지원</span></p></div>'
+            '<div class="hu-b"><button class="btn btn-p" type="button" data-hero-pick>%s파일로 무료 검사</button><button class="btn btn-p" type="button" data-hero-tx aria-expanded="false" aria-controls="heroTx">%s텍스트로 무료 검사</button></div>'
+            '<div class="hu-tx" id="heroTx"><label class="sr" for="heroText">검사할 글</label><textarea id="heroText" data-hero-text rows="4" spellcheck="false" placeholder="검사할 글을 붙여 넣으면 바로 AI 작성률을 검사합니다."></textarea>'
+            '<div class="hu-tx-b"><span class="hu-tx-n">붙여 넣으면 바로 검사 · Ctrl + Enter</span><button class="btn btn-p" type="button" data-hero-run>%s무료 AI 작성률 검사</button></div></div>'
+            '<p class="hu-drop">파일을 이 상자에 끌어다 놓아도 바로 검사합니다</p></div>'
             '<ul class="hero-pts">%s</ul></div>'
             '<div id="tool" class="tool-w hero-tool">%s</div>'
             '<div class="hero-demo">%s</div>'
             '</div></div></section>') % (
-        cls, eyebrow, ico("trend_down"), h1, lead, ico("upload"), ico("upload"), ico("pen"), "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
+        cls, eyebrow, ico("trend_down"), h1, lead, ico("upload"), ico("upload"), ico("pen"), ico("search"), "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
 
 
 # ---------------- 홈 ----------------
@@ -418,7 +429,7 @@ def build_home():
     body += P.trust_strip(ico)
     body += P.alarm_section(ico)
     body += ('<section class="sec" id="example"><div class="wrap"><div class="center"><p class="kick">%s실제 엔진으로 잰 결과</p><h2 class="h2">보라색 문장이 사라질 때까지,<br>뜻은 그대로 두고 말투만 사람처럼</h2>'
-             '<p class="sub">아래 예시는 한국휴머나이저 엔진에 그대로 넣어 잰 실제 값입니다. 보라색은 AI 패턴이 검출된 문장, 초록색은 AI 패턴을 지운 곳입니다.</p></div>%s</div></section>') % (ico("eye"), compare_block())
+             '<p class="sub">아래 예시는 한국휴머나이저 엔진에 그대로 넣어 잰 실제 값입니다. 연한 파란 바탕은 AI 패턴이 감지된 문장, 초록색은 AI 패턴을 개선한 문장입니다.</p></div>%s</div></section>') % (ico("eye"), compare_block())
     body += P.how_section(ico)
     body += P.features_section(ico)
     body += P.compare_table(ico)
@@ -466,7 +477,7 @@ def build_landings():
         body = hero_with_tool(L["eyebrow"], L["h1"], L["lead"], L.get("pts"), cls="hero lp-hero")
         body += demo_json()
         body += '<section class="sec-s"><div class="wrap-n">%s<div class="answer">%s</div><div class="prose">%s</div></div></section>' % (crumbs_html(trail), L["answer"], L["body"])
-        body += ('<section class="sec alt"><div class="wrap"><div class="center"><p class="kick">%s실제 엔진으로 잰 결과</p><h2 class="h2">%s</h2><p class="sub">보라색은 AI 패턴이 검출된 문장, 초록색은 AI 패턴을 지운 곳입니다.</p></div>%s</div></section>') % (ico("eye"), L.get("cmp_h") or "휴머나이징 전과 후, 직접 비교해 보세요", compare_block())   # 11.23: cmp_h 가 None 인 쪽에 'None' 이 보이던 것 바로잡음
+        body += ('<section class="sec alt"><div class="wrap"><div class="center"><p class="kick">%s실제 엔진으로 잰 결과</p><h2 class="h2">%s</h2><p class="sub">연한 파란 바탕은 AI 패턴이 감지된 문장, 초록색은 AI 패턴을 개선한 문장입니다.</p></div>%s</div></section>') % (ico("eye"), L.get("cmp_h") or "휴머나이징 전과 후, 직접 비교해 보세요", compare_block())   # 11.23: cmp_h 가 None 인 쪽에 'None' 이 보이던 것 바로잡음
         body += P.how_section(ico)
         body += '<section class="sec"><div class="wrap-n"><h2 class="h2 center">%s 자주 묻는 질문</h2>%s<div class="links" style="margin-top:28px;justify-content:center">%s</div></div></section>' % (
             esc(L["crumb"]), faq_html(L["faq"]), "".join('<a href="/%s">%s</a>' % (u, t) for u, t in L["related"]))

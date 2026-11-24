@@ -556,3 +556,71 @@ html body .hz7-dlg-b .hz19-auto .ico { margin-top: 2px; padding: 2px; border-rad
 @keyframes hz38glow{0%,100%{transform:translate(0,0) scale(1);opacity:.9}50%{transform:translate(-30px,20px) scale(1.12);opacity:.6}}
 @media (max-width:560px){.hz38{padding:18px 16px 14px}.hz38-top{gap:14px;align-items:flex-start}.hz38-doc{flex-basis:86px;height:88px;padding:11px 9px}.hz38-ln{height:5px}.hz38-tag{display:none}.hz38-tx b{font-size:15.5px}.hz38-tx p{font-size:13px}.hz38-st li{font-size:11.5px;padding:4px 8px 4px 5px}}
 @media (prefers-reduced-motion:reduce){.hz38 *,.hz38::before,.hz38 *::after{animation:none!important}.hz38-ln::after{background-color:var(--ds-blue-600,#2563eb);opacity:.7}.hz38-chk .hz38-ln::after{background-color:#c9d3e3}.hz38-chk .hz38-ln.f::after{background-color:var(--ai,#e5484d)}.hz38-beam{display:none}}
+
+/* ===== 13.39(2026.11.24 20:47 대표 '메인도 좀 바꿔줘'): 프리미엄 기술 플랫폼 느낌으로. 예전 규칙은 지우지 않고 뒤에서 덮어씀 =====
+   격자 없는 밝은 단색 바탕 · 두 줄 제목(남색 / 선명한 파랑) · 왼쪽 파일 상자에서 바로 무료 검사(파일 · 텍스트) · 결과 중심 예시 창
+   (보라 글씨 · 밑줄 · 문장별 배지 없이, 감지 문장은 검정 글씨에 연한 파랑 바탕, 수치 44px) · 그림자와 모서리 줄임 · 두 단추 같은 브랜드 파랑 */
+:root{--vivid:#145ce0;--good:#00865f;--high:#dc3452}
+.hero{background:#f6f8fb}
+.hero::before{display:none}
+.hero .h1{font-size:clamp(34px,4.3vw,56px);font-weight:800;letter-spacing:-.045em;line-height:1.16}
+.hero .h1 .h1-a{color:var(--navy)}
+.hero .h1 em.h1-b{background:none;-webkit-background-clip:border-box;background-clip:border-box;-webkit-text-fill-color:currentColor;color:var(--vivid)}
+.hero .lead{color:#475569}
+.hero .eyebrow{box-shadow:none}
+/* 왼쪽 파일 상자: 두 단추 모두 바로 무료 검사. '텍스트로 무료 검사'는 그 자리에서 글 칸을 펼침(아래로 내려가지 않음) */
+.hero-up.hu2{border-radius:12px;box-shadow:0 1px 2px rgba(15,23,42,.05);cursor:default;padding:18px 18px 14px}
+.hero-up.hu2:hover{box-shadow:0 1px 2px rgba(15,23,42,.05);background:#fff}
+.hero-up.hu2.over{border-color:var(--brand);background:var(--brand-l);box-shadow:0 0 0 4px rgba(11,61,145,.10)}
+.hero-up.hu2 .hu-ic{border-radius:10px}
+.hero-up.hu2 .hu-b .btn{border-radius:8px;box-shadow:none;min-height:50px;font-size:15.5px}
+.hero-up.hu2 .hu-b .btn[aria-expanded="true"]{background:var(--brand-d)}
+.hero-up.hu2 .hu-tx{display:none;margin-top:12px}
+.hero-up.hu2.tx .hu-tx{display:block}
+.hero-up.hu2 .hu-tx textarea{display:block;box-sizing:border-box;width:100%;min-height:120px;max-height:40vh;resize:vertical;padding:12px 14px;border:1px solid #cfd8e6;border-radius:8px;font:inherit;font-size:15px;line-height:1.7;color:var(--ink);background:#fff;outline:none}
+.hero-up.hu2 .hu-tx textarea:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(11,61,145,.12)}
+.hero-up.hu2 .hu-tx-b{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
+.hero-up.hu2 .hu-tx-n{font-size:12.5px;color:var(--ink-3)}
+.hero-up.hu2 .hu-tx-b .btn{border-radius:8px;box-shadow:none;padding:11px 16px;font-size:14.5px}
+.hero-up.hu2 .hu-drop{margin:10px 0 0;font-size:12.5px;color:var(--ink-3);text-align:center}
+.hero-up.hu2.tx .hu-drop{display:none}
+/* 오른쪽 예시 창: 결과 중심 */
+.hero .demo{border-radius:12px;box-shadow:0 1px 2px rgba(15,23,42,.05),0 14px 34px -26px rgba(15,23,42,.3)}
+.hero .demo-bar{background:#fff}
+.hero .demo-tabs{border-radius:8px}
+.hero .demo-tabs button{border-radius:6px}
+.hero .dm{border-radius:10px}
+.hero .dm b{font-size:44px;line-height:1.08}
+.hero .dm.bad{border-color:#f6d2d9;background:#fff7f8}
+.hero .dm.bad b{color:var(--high)}
+.hero .dm.bad b em{background:var(--high);letter-spacing:0;white-space:nowrap}
+.hero .dm.bad .dm-bar i{color:var(--high)}
+.hero .dm.good{border-color:#cdebdf;background:#f4fbf8}
+.hero .dm.good b{color:var(--good)}
+.hero .dm.good b em{background:var(--good);letter-spacing:0;white-space:nowrap}
+.hero .dm.good .dm-bar i{color:var(--good)}
+.hero .dm-arr{background:var(--brand)}
+.hero .demo-state .bad{color:var(--high)}
+.hero .demo-state .good{color:var(--good)}
+.hero .demo-state .dot{background:var(--vivid)}
+#demo .demo-tag{display:none}
+#demo .ai-blk{border-left:3px solid rgba(20,92,224,.35)}
+#demo .ai-blk.done{border-left-color:var(--good)}
+#demo .s.ai{color:var(--ink);font-weight:400;background:rgba(20,92,224,.10);border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#demo .s.ai .x{text-decoration:none}
+#demo .x.del{color:#94a3b8!important;text-decoration:line-through!important;text-decoration-color:#94a3b8!important;opacity:.6}
+#demo .x.ins,#demo .s.hu mark{color:var(--good);background:rgba(0,134,95,.12);font-weight:700;animation:none}
+#demo .demo-scan{background:linear-gradient(180deg,rgba(20,92,224,0),rgba(20,92,224,.08) 45%,rgba(20,92,224,.18) 50%,rgba(20,92,224,.08) 55%,rgba(20,92,224,0))}
+.demo-legend .a{color:var(--ink-2)}
+.demo-legend .a i{background:rgba(20,92,224,.16);border-bottom:0;border-radius:3px}
+.demo-legend .h{color:var(--ink-2)}
+.demo-legend .h i{background:rgba(0,134,95,.18);border-bottom:0;border-radius:3px}
+.hero .demo-ft .btn{border-radius:8px;box-shadow:none}
+.hero .demo-ft .demo-free{background:var(--brand);color:#fff;border-color:var(--brand)}
+.hero .demo-ft .demo-free:hover{background:var(--brand-d)}
+/* 비교 구역도 같은 표시(연한 파랑 = 감지, 초록 = 개선) */
+.cmp-t .s.ai{color:var(--ink);font-weight:400;background:rgba(20,92,224,.10);border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.cmp-t .s.ai .x{text-decoration:none}
+.cmp-t mark{color:var(--good);background:rgba(0,134,95,.12)}
+@media (max-width:760px){.hero .dm b{font-size:36px}.hero-up.hu2 .hu-b{flex-wrap:wrap}}
+.demo-legend .a i,.demo-legend .h i{width:18px;height:10px;border:0!important;border-radius:3px}.demo-legend .a i{background:rgba(20,92,224,.18)!important}.demo-legend .h i{background:rgba(0,134,95,.2)!important}
