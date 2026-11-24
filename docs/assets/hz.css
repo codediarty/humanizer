@@ -643,3 +643,6 @@ html body .hz7-dlg-b .hz19-auto .ico { margin-top: 2px; padding: 2px; border-rad
 .hero-up.hu3 .hu-in textarea:not(:placeholder-shown)~.hu-cta,.hero-up.hu3.over .hu-cta{display:none}
 .hero-up.hu3 .hu-run{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;min-height:50px;border-radius:8px;box-shadow:none;font-size:15.5px}
 .hero-up.hu3 .hu-run .ico{width:18px;height:18px}
+
+/* 2026.11.25 대표: 요금 칸은 칸 어디를 눌러도 충전으로(site.js) */
+.pk:has(a.btn[data-pack]){cursor:pointer}
