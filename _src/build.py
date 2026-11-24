@@ -409,16 +409,16 @@ def hero_with_tool(eyebrow, h1, lead, pts=None, cls="hero"):
     pts = pts or ["한국어 특화 휴머나이징", "문장 단위 AI 패턴 분석", "변환 전후 작성률 비교"]   # 2026.11.24 20:47 대표 전 → 후(예전 11.23 21:41: 한국어 특화 분석 · 문장별 AI 작성률 확인 · 다양한 문서 형식 지원)   # 2026.11.21 21:24 대표: 파일 보호 문구는 자주 묻는 질문으로
     return ('<section class="%s" id="top"><div class="wrap"><div class="hero-grid hg2">'
             '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-2"><b>%s</b>AI 작성률 감소 전문 솔루션</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
-            '<div class="hero-up hu2" data-hero-drop><div class="hu-h"><span class="hu-ic">%s</span><p><b>지금 내 문서의 AI 작성률을 확인하세요.</b><span>한글(HWP, HWPX), 워드(DOCX), PDF, TXT 지원</span></p></div>'
-            '<div class="hu-b"><button class="btn btn-p" type="button" data-hero-pick>%s파일로 무료 검사</button><button class="btn btn-p" type="button" data-hero-tx aria-expanded="false" aria-controls="heroTx">%s텍스트로 무료 검사</button></div>'
-            '<div class="hu-tx" id="heroTx"><label class="sr" for="heroText">검사할 글</label><textarea id="heroText" data-hero-text rows="4" spellcheck="false" placeholder="검사할 글을 붙여 넣으면 바로 AI 작성률을 검사합니다."></textarea>'
-            '<div class="hu-tx-b"><span class="hu-tx-n">붙여 넣으면 바로 검사 · Ctrl + Enter</span><button class="btn btn-p" type="button" data-hero-run>%s무료 AI 작성률 검사</button></div></div>'
-            '<p class="hu-drop">파일을 이 상자에 끌어다 놓아도 바로 검사합니다</p></div>'
+            # 13.39b(2026.11.24 20:59 대표 '굳이 3개로 나눌 필요가 있냐 … 박스 안에 파일 올리기 같이 하면되잖아'): 상자 하나에 글 칸 + 칸 안 '파일 올리기'(끌어다 놓기) + 검사 단추 하나
+            '<div class="hero-up hu3" data-hero-drop><div class="hu-h"><span class="hu-ic">%s</span><p><b>지금 내 문서의 AI 작성률을 확인하세요.</b><span>한글(HWP, HWPX), 워드(DOCX), PDF, TXT 지원</span></p></div>'
+            '<div class="hu-in"><label class="sr" for="heroText">검사할 글</label><textarea id="heroText" data-hero-text rows="5" spellcheck="false" placeholder="검사할 글을 붙여 넣으면 바로 AI 작성률을 검사합니다."></textarea>'
+            '<div class="hu-cta"><button class="hu-up" type="button" data-hero-pick>%s<span>파일 올리기</span></button><span class="hu-or">또는 여기로 끌어다 놓으세요</span></div></div>'
+            '<button class="btn btn-p hu-run" type="button" data-hero-run>%s무료 AI 작성률 검사</button></div>'
             '<ul class="hero-pts">%s</ul></div>'
             '<div id="tool" class="tool-w hero-tool">%s</div>'
             '<div class="hero-demo">%s</div>'
             '</div></div></section>') % (
-        cls, eyebrow, ico("trend_down"), h1, lead, ico("upload"), ico("upload"), ico("pen"), ico("search"), "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
+        cls, eyebrow, ico("trend_down"), h1, lead, ico("upload"), ico("upload"), ico("search"), "".join("<li>%s%s</li>" % (ico("check"), t) for t in pts), tool_html(), demo_card())
 
 
 # ---------------- 홈 ----------------

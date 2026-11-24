@@ -624,3 +624,22 @@ html body .hz7-dlg-b .hz19-auto .ico { margin-top: 2px; padding: 2px; border-rad
 .cmp-t mark{color:var(--good);background:rgba(0,134,95,.12)}
 @media (max-width:760px){.hero .dm b{font-size:36px}.hero-up.hu2 .hu-b{flex-wrap:wrap}}
 .demo-legend .a i,.demo-legend .h i{width:18px;height:10px;border:0!important;border-radius:3px}.demo-legend .a i{background:rgba(20,92,224,.18)!important}.demo-legend .h i{background:rgba(0,134,95,.2)!important}
+/* 13.39b(2026.11.24 20:59 대표 '박스 안에 파일 올리기 같이'): 첫 화면 왼쪽 상자 하나 = 글 칸(칸 안에 파일 올리기 · 끌어다 놓기) + 무료 검사 단추 */
+.hero-up.hu3{cursor:default;padding:16px 16px 16px;border-radius:12px;border:1px solid #d3dcec;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.05)}
+.hero-up.hu3:hover{background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.05)}
+.hero-up.hu3.over{border-color:var(--brand);background:var(--brand-l);box-shadow:0 0 0 4px rgba(11,61,145,.10)}
+.hero-up.hu3 .hu-h{gap:12px}
+.hero-up.hu3 .hu-ic{width:40px;height:40px;border-radius:10px}
+.hero-up.hu3 .hu-ic .ico{width:20px;height:20px}
+.hero-up.hu3 .hu-in{position:relative;margin-top:12px}
+.hero-up.hu3 .hu-in textarea{display:block;box-sizing:border-box;width:100%;height:136px;min-height:136px;max-height:40vh;resize:vertical;padding:12px 14px;border:1px solid #cfd8e6;border-radius:8px;font:inherit;font-size:15px;line-height:1.7;color:var(--ink);background:#fbfcfe;outline:none;transition:border-color .15s,box-shadow .15s,background-color .15s}
+.hero-up.hu3 .hu-in textarea:focus{border-color:var(--brand);background:#fff;box-shadow:0 0 0 3px rgba(11,61,145,.12)}
+.hero-up.hu3 .hu-cta{position:absolute;left:0;right:0;bottom:16px;display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none;text-align:center}
+.hero-up.hu3 .hu-up{pointer-events:auto;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 16px;border-radius:8px;border:1.5px dashed rgba(11,61,145,.45);background:rgba(11,61,145,.05);color:var(--brand);font:inherit;font-size:14.5px;font-weight:750;cursor:pointer;transition:background-color .15s,border-color .15s}
+.hero-up.hu3 .hu-up .ico{width:17px;height:17px;stroke-width:2.2}
+.hero-up.hu3 .hu-up:hover{background:rgba(11,61,145,.1);border-color:var(--brand)}
+.hero-up.hu3 .hu-up:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.hero-up.hu3 .hu-or{font-size:12.5px;color:var(--ink-3)}
+.hero-up.hu3 .hu-in textarea:not(:placeholder-shown)~.hu-cta,.hero-up.hu3.over .hu-cta{display:none}
+.hero-up.hu3 .hu-run{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:10px;min-height:50px;border-radius:8px;box-shadow:none;font-size:15.5px}
+.hero-up.hu3 .hu-run .ico{width:18px;height:18px}
