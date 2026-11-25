@@ -103,7 +103,7 @@ def header(path):
 FT_SEARCH = [("ai-humanizer/", "AI 휴머나이저"), ("humanizing/", "휴머나이징"), ("lower-ai-rate/", "AI 작성률 낮추기"), ("ai-plagiarism/", "AI 표절률 낮추기"),
              ("copykiller/", "표절 검사기 AI 작성률 낮추기"), ("gptkiller/", "GPT 탐지 낮추기"),
              ("ai-bypass/", "AI 탐지 대비 고쳐 쓰기"), ("free/", "AI 휴머나이저 무료"), ("best-ai-humanizer/", "휴머나이저 추천 · 비교"),
-             ("ai-tone/", "AI 말투 없애기"), ("ai-reader/", "AI 판독기 무료"), ("rewrite/", "글 다시 써 주는 사이트")]   # 2026.11.25 새 검색 쪽
+             ("ai-tone/", "AI 말투 없애기"), ("ai-reader/", "AI 판독기 · AI 탐지기 무료"), ("rewrite/", "글 다시 써 주는 사이트")]   # 2026.11.25 새 검색 쪽
 FT_USE = [("thesis/", "논문 AI 작성률 낮추기"), ("report/", "레포트 AI 작성률 낮추기"), ("resume/", "자소서 AI 작성률 낮추기"), ("natural/", "AI 티 안 나게 바꾸기"),
           ("ai-converter/", "AI 문장 변환기"), ("ai-check/", "AI 작성률 검사 무료")]
 
