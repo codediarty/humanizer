@@ -27,7 +27,7 @@ import more_kw as MK  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261125f"
+VER = "20261125g"
 TODAY = "2026-11-24"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -419,8 +419,16 @@ def hero_with_tool(eyebrow, h1, lead, pts=None, cls="hero"):
     pts = pts or ["한국어 특화 휴머나이징", "문장 단위 AI 패턴 분석", "변환 전후 작성률 비교"]   # 2026.11.24 20:47 대표 전 → 후(예전 11.23 21:41: 한국어 특화 분석 · 문장별 AI 작성률 확인 · 다양한 문서 형식 지원)   # 2026.11.21 21:24 대표: 파일 보호 문구는 자주 묻는 질문으로
     # 2026.11.25 18:32 대표 '메인화면이 밋밋 · 흰 바탕에 어울리는 고급스럽고 비싸 보이는 배경': 첫 화면(홈)만 지폐 · 증서풍 길로셰 로제트(assets/img/hz-rosette.svg, 직접 계산해 그림)가
     # 오른쪽 위에서 아주 천천히 돌고 두 겹이 반대로 돌아 은은한 물결 무늬, 빛 한 줄기가 가끔 지나감(hz.css .hx-lux). 움직임 줄이기 설정이면 멈춤
-    lux = ('<div class="hx-lux" aria-hidden="true"><img class="hx-rose a" src="/assets/img/hz-rosette.svg?v=%s" alt="" width="1000" height="1000" decoding="async" fetchpriority="low">'
-           '<img class="hx-rose b" src="/assets/img/hz-rosette.svg?v=%s" alt="" width="1000" height="1000" decoding="async" fetchpriority="low"><i class="hx-sheen"></i></div>' % (VER, VER)) if cls == "hero" else ""
+    # (18:32 판, 20:44 대표 '배경 이상한데 더 어지럽기만 하고'로 쓰지 않음. 되살릴 때 아래 두 줄 주석을 풀면 됨. 그림 파일 assets/img/hz-rosette.svg 는 그대로 둠)
+    # lux = ('<div class="hx-lux" aria-hidden="true"><img class="hx-rose a" src="/assets/img/hz-rosette.svg?v=%s" alt="" width="1000" height="1000" decoding="async" fetchpriority="low">'
+    #        '<img class="hx-rose b" src="/assets/img/hz-rosette.svg?v=%s" alt="" width="1000" height="1000" decoding="async" fetchpriority="low"><i class="hx-sheen"></i></div>' % (VER, VER)) if cls == "hero" else ""
+    # 2026.11.25 20:44 대표 '한국휴머나이저 배경 이상한데 더 어지럽기만 하고': 가는 선이 겹쳐 도는 무늬(물결이 일렁임)를 빼고, 오른쪽 예시 창 뒤에만
+    # 옅은 점 격자 + 얇은 궤도 세 줄 + 아주 천천히 도는 작은 점 두 개(AIHuman 궤도를 흰 바탕에 맞게 옅게). 왼쪽 글 뒤에는 무늬 없음(hz.css .hx2)
+    lux = ('<div class="hx-lux hx2" aria-hidden="true"><i class="hx-dots"></i><svg class="hx-orbit" viewBox="0 0 1000 1000" focusable="false">'
+           '<circle cx="500" cy="500" r="440" class="r1"/><circle cx="500" cy="500" r="330" class="r2"/><circle cx="500" cy="500" r="220" class="r3"/>'
+           '<g class="o1"><circle cx="830" cy="500" r="11" class="halo"/><circle cx="830" cy="500" r="4" class="sat"/></g>'
+           '<g class="o2"><circle cx="500" cy="60" r="9" class="halo"/><circle cx="500" cy="60" r="3.2" class="sat s2"/></g>'
+           '<circle cx="280" cy="500" r="2" class="spk"/><circle cx="733" cy="267" r="1.6" class="spk k2"/><circle cx="500" cy="940" r="1.8" class="spk k3"/></svg></div>') if cls == "hero" else ""
     return ('<section class="%s" id="top">' + lux + '<div class="wrap"><div class="hero-grid hg2">'
             '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-2"><b>%s</b>AI 작성률 감소 전문 솔루션</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
             # 13.39b(2026.11.24 20:59 대표 '굳이 3개로 나눌 필요가 있냐 … 박스 안에 파일 올리기 같이 하면되잖아'): 상자 하나에 글 칸 + 칸 안 '파일 올리기'(끌어다 놓기) + 검사 단추 하나

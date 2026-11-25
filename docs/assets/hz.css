@@ -755,3 +755,26 @@ html.hz42-on,html.hz42-on body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.hx-rose,.hx-sheen{animation:none}.hx-sheen{display:none}}
 /* 2026.11.25 새 검색 쪽: 표 아래 작은 안내(설명을 위해 만든 예 · 상표 등) */
 .prose .measured{font-size:13px;line-height:1.6;color:var(--ink-3);margin:8px 0 0}
+/* 2026.11.25 20:44 대표 '한국휴머나이저 배경 이상한데 더 어지럽기만 하고': 가는 선이 겹쳐 도는 길로셰(.hx-rose · .hx-sheen)는 첫 화면에서 빼고(규칙은 남겨 둠),
+   오른쪽 예시 창 둘레에만 옅은 점 격자 + 얇은 궤도 세 줄 + 아주 천천히 도는 작은 점 두 개. 왼쪽 글 뒤에는 무늬 없음. 움직임 줄이기 설정이면 멈춤 */
+.hx-lux.hx2::before{right:-140px;top:-220px;width:1040px;height:940px;background:radial-gradient(closest-side,rgba(37,99,235,.10),rgba(37,99,235,.04) 55%,rgba(37,99,235,0))}
+.hx-lux.hx2::after{left:-260px;bottom:-300px;width:700px;height:560px;background:radial-gradient(closest-side,rgba(200,16,46,.03),rgba(200,16,46,0))}
+.hx-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(30,58,138,.22) 1px,transparent 1.5px);background-size:22px 22px;-webkit-mask-image:radial-gradient(ellipse 30% 55% at 84% 34%,#000 18%,transparent 74%);mask-image:radial-gradient(ellipse 30% 55% at 84% 34%,#000 18%,transparent 74%)}
+.hx-orbit{position:absolute;left:calc(50% + 400px);top:250px;width:900px;height:900px;margin:-450px 0 0 -450px;overflow:visible}
+.hx-orbit circle{fill:none}
+.hx-orbit .r1{stroke:#1e3a8a;stroke-opacity:.08;stroke-width:1}
+.hx-orbit .r2{stroke:#1e3a8a;stroke-opacity:.12;stroke-width:1}
+.hx-orbit .r3{stroke:#1e3a8a;stroke-opacity:.22;stroke-width:2;stroke-dasharray:1 11;stroke-linecap:round}
+.hx-orbit .halo{fill:#2563eb;fill-opacity:.12}
+.hx-orbit .sat{fill:#2563eb;fill-opacity:.7}
+.hx-orbit .s2{fill:#1e3a8a;fill-opacity:.5}
+.hx-orbit .spk{fill:#1e3a8a;fill-opacity:.4;animation:hxTw 4.6s ease-in-out infinite}
+.hx-orbit .k2{animation-delay:1.5s}.hx-orbit .k3{animation-delay:3s}
+.hx-orbit .o1,.hx-orbit .o2{transform-box:view-box;transform-origin:500px 500px}
+.hx-orbit .o1{animation:hxSpin 80s linear infinite}
+.hx-orbit .o2{animation:hxSpinR 120s linear infinite}
+@keyframes hxSpinR{to{transform:rotate(-360deg)}}
+@keyframes hxTw{50%{fill-opacity:.1}}
+@media (max-width:1080px){.hx-orbit{left:auto;right:-300px;top:-250px;margin:0;width:640px;height:640px}.hx-dots{-webkit-mask-image:radial-gradient(ellipse 55% 22% at 88% 4%,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse 55% 22% at 88% 4%,#000 15%,transparent 72%)}}
+@media (max-width:760px){.hx-orbit{right:-250px;top:-225px;width:500px;height:500px}}
+@media (prefers-reduced-motion:reduce){.hx-orbit .o1,.hx-orbit .o2,.hx-orbit .spk{animation:none}}
