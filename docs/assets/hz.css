@@ -716,3 +716,7 @@ html.hz42-on,html.hz42-on body{overflow:hidden}
 @media (prefers-reduced-motion: reduce) { .am-tok .am-tok-d { animation: none; } }
 @media (max-width: 640px) { .am-tok { height: 36px; padding: 0 11px; gap: 5px; } .am-tok .am-tok-p { display: none; } }
 @media (max-width: 400px) { .am-tok .am-tok-l { display: none; } .am-tok b { font-size: 15px; } }
+
+/* 2026.11.25 문의 주소가 사이트 주소(token@…)로 길어져 320px 휴대폰에서 소개 · 약관 표가 옆으로 넘치지 않게: 긴 주소는 칸 안에서 줄바꿈 */
+.prose th,.prose td{overflow-wrap:anywhere}
+.ft li,.ft-biz{overflow-wrap:anywhere}
