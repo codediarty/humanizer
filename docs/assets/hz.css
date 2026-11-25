@@ -737,3 +737,19 @@ html.hz42-on,html.hz42-on body{overflow:hidden}
 .demo-sum b{color:var(--ink);font-weight:800}
 /* 같은 때: 휴대폰에서 예시 창 '휴머나이징 후' 칸이 오른쪽으로 잘리던 것(두 칸을 같은 너비로, 판정 표시는 아래 줄로) */
 @media (max-width:760px){.demo-meter{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}.dm b{flex-wrap:wrap;row-gap:4px}}
+
+/* 2026.11.25 18:32 대표 '메인화면이 밋밋 · 흰 바탕에 어울리는 고급스럽고 비싸 보이는 것': 첫 화면 오른쪽 위 길로셰 로제트(지폐 · 증서 무늬).
+   한 겹은 아주 천천히 돌고, 조금 큰 한 겹은 반대로 돌아 선이 겹치는 자리에 은은한 물결(모아레). 빛 한 줄기가 가끔 지나감. 글 · 예시 창 뒤라 읽는 데 방해 없음 */
+.hx-lux{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.hx-lux::before{content:"";position:absolute;right:-160px;top:-260px;width:980px;height:980px;border-radius:50%;background:radial-gradient(closest-side,rgba(37,99,235,.10),rgba(37,99,235,.04) 55%,rgba(37,99,235,0))}
+.hx-lux::after{content:"";position:absolute;left:-220px;bottom:-260px;width:760px;height:620px;border-radius:50%;background:radial-gradient(closest-side,rgba(200,16,46,.05),rgba(200,16,46,0))}
+.hx-rose{position:absolute;left:calc(50% + 150px);top:440px;width:1440px;height:1440px;margin:-720px 0 0 -720px;max-width:none;opacity:.2;will-change:transform}
+.hx-rose.a{animation:hxSpin 600s linear infinite}
+.hx-rose.b{opacity:.09;animation:hxSpinB 820s linear infinite}
+.hx-sheen{position:absolute;top:-30%;left:0;width:34%;height:170%;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.75) 50%,rgba(255,255,255,0));transform:translateX(-140%) rotate(14deg);animation:hxSheen 13s cubic-bezier(.45,.05,.25,1) infinite}
+@keyframes hxSpin{to{transform:rotate(360deg)}}
+@keyframes hxSpinB{from{transform:scale(1.045) rotate(0deg)}to{transform:scale(1.045) rotate(-360deg)}}
+@keyframes hxSheen{0%,55%{transform:translateX(-140%) rotate(14deg)}100%{transform:translateX(420%) rotate(14deg)}}
+@media (max-width:1080px){.hx-rose{left:auto;right:-420px;top:-420px;margin:0;width:980px;height:980px;opacity:.2}.hx-rose.b{opacity:.09}}
+@media (max-width:760px){.hx-rose{right:-330px;top:-300px;width:680px;height:680px;opacity:.18}.hx-rose.b{opacity:.08}.hx-lux::before{right:-260px;top:-300px;width:640px;height:640px}}
+@media (prefers-reduced-motion:reduce){.hx-rose,.hx-sheen{animation:none}.hx-sheen{display:none}}

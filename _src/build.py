@@ -416,7 +416,11 @@ def hero_with_tool(eyebrow, h1, lead, pts=None, cls="hero"):
     """2026.11.21 밤(대표: '좌측은 너무 길어서 잘리고 우측은 공간이 남아'): 첫 화면은 왼쪽 글 + 오른쪽 예시를 같은 높이로 맞추고,
     검사 도구는 그 바로 아래 넓은 칸으로(id="tool" 그대로라 '무료 검사' 단추 · 모바일 고정 단추가 그대로 씀). 모바일은 글 → 도구 → 예시"""
     pts = pts or ["한국어 특화 휴머나이징", "문장 단위 AI 패턴 분석", "변환 전후 작성률 비교"]   # 2026.11.24 20:47 대표 전 → 후(예전 11.23 21:41: 한국어 특화 분석 · 문장별 AI 작성률 확인 · 다양한 문서 형식 지원)   # 2026.11.21 21:24 대표: 파일 보호 문구는 자주 묻는 질문으로
-    return ('<section class="%s" id="top"><div class="wrap"><div class="hero-grid hg2">'
+    # 2026.11.25 18:32 대표 '메인화면이 밋밋 · 흰 바탕에 어울리는 고급스럽고 비싸 보이는 배경': 첫 화면(홈)만 지폐 · 증서풍 길로셰 로제트(assets/img/hz-rosette.svg, 직접 계산해 그림)가
+    # 오른쪽 위에서 아주 천천히 돌고 두 겹이 반대로 돌아 은은한 물결 무늬, 빛 한 줄기가 가끔 지나감(hz.css .hx-lux). 움직임 줄이기 설정이면 멈춤
+    lux = ('<div class="hx-lux" aria-hidden="true"><img class="hx-rose a" src="/assets/img/hz-rosette.svg?v=%s" alt="" width="1000" height="1000" decoding="async" fetchpriority="low">'
+           '<img class="hx-rose b" src="/assets/img/hz-rosette.svg?v=%s" alt="" width="1000" height="1000" decoding="async" fetchpriority="low"><i class="hx-sheen"></i></div>' % (VER, VER)) if cls == "hero" else ""
+    return ('<section class="%s" id="top">' + lux + '<div class="wrap"><div class="hero-grid hg2">'
             '<div class="hero-copy"><div class="eb-row"><p class="eyebrow">%s</p><p class="eyebrow eb-2"><b>%s</b>AI 작성률 감소 전문 솔루션</p></div><h1 class="h1">%s</h1><p class="lead">%s</p>'
             # 13.39b(2026.11.24 20:59 대표 '굳이 3개로 나눌 필요가 있냐 … 박스 안에 파일 올리기 같이 하면되잖아'): 상자 하나에 글 칸 + 칸 안 '파일 올리기'(끌어다 놓기) + 검사 단추 하나
             '<div class="hero-up hu3" data-hero-drop><div class="hu-h"><span class="hu-ic">%s</span><p><b>지금 내 문서의 AI 작성률을 확인하세요.</b><span>한글(HWP, HWPX), 워드(DOCX), PDF, TXT 지원</span></p></div>'
