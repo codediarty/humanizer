@@ -58,6 +58,7 @@
       stop(); cur = i; phase = 1; var S = D.samples[i];
       $$('.demo-tabs button', demo).forEach(function (b, j) { b.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
       if (fn) fn.textContent = S.file;
+      var sm = $('.demo-sum', demo); if (sm) sm.innerHTML = '<span>AI 패턴 문장 <b>' + S.before.n + '개 → ' + S.after.n + '개</b></span><span>바꾼 곳 <b>' + S.changes + '곳</b></span><span>숫자 · 이름 · 인용 <b>그대로</b></span>';   /* 2026.11.25 예시 창 아래 요약(탭마다) */
       doc.innerHTML = S.doc; var blk = $('.ai-blk', doc), sents = $$('.s', doc);
       sents.forEach(function (x) { x.classList.add('pre'); });
       idle(mFrom, '검사 중'); idle(mTo, '대기'); setBtn(false);

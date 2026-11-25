@@ -27,7 +27,7 @@ import more_kw as MK  # noqa: E402
 SITE = "https://humanizer.co.kr"
 BRAND = "한국휴머나이저"
 BRAND_EN = "Korea Humanizer"
-VER = "20261125d"
+VER = "20261125f"
 TODAY = "2026-11-24"
 API = "https://script.google.com/macros/s/AKfycbwo5wo2gZGCAj3XGLaKfzxZOqHVIkyh9slHiguF_lBO_OKKUpn_GLbW0oOpujatwWtmNw/exec"
 SHOP = "https://skkc.co.kr/shop_view?idx=%s&kaiec_buy=1"
@@ -339,11 +339,13 @@ def demo_card():
             '<div class="dm to good wait"><small>휴머나이징 후 AI 작성률</small><b>– <em>대기</em></b><div class="dm-bar"><i style="width:0"></i></div></div></div>'
             '<div class="demo-legend"><span class="a"><i></i>AI 패턴 감지 문장</span><span class="h"><i></i>AI 패턴 개선 문장</span><span class="demo-state" aria-live="polite"></span></div>'
             '<div class="demo-doc">%s</div>'
+            # 2026.11.25 대표 '우측이 짧아서 밸런스': 예시 창을 왼쪽 높이로 늘린 만큼, 본문 아래에 이 예시의 변환 요약(site.js 가 탭마다 바꿈)
+            '<div class="demo-sum"><span>AI 패턴 문장 <b>%s개 → %s개</b></span><span>바꾼 곳 <b>%s곳</b></span><span>숫자 · 이름 · 인용 <b>그대로</b></span></div>'
             # 2026.11.21 밤 대표: '휴머나이징 보기 · 처음부터 다시'(예시 재생) 대신 실제 흐름으로: 휴머나이징 하기(내 글 인간화) → 이 글 맞춤 충전 → 결제 후 이어서
             '<div class="demo-ft"><a class="btn btn-p btn-s demo-go" href="#tool" data-hum-go>%s<span>AI 작성률 낮추기</span></a>'
             '<a class="btn btn-p btn-s demo-free" href="#tool" data-tool>무료 AI 작성률 검사</a><span class="note">%s</span></div></div>') % (
         ico("file"), esc(first["file"]), tabs, first["before"]["rate"], first["before"]["band"], first["before"]["rate"], ico("arrow"),
-        first["doc"], ico("trend_down"), esc(DEMO_MEASURED))
+        first["doc"], first["before"]["n"], first["after"]["n"], first["changes"], ico("trend_down"), esc(DEMO_MEASURED))
 
 
 def compare_block():
@@ -389,8 +391,11 @@ def pricing_cards(cta_text="충전하기"):
         cls = "pk pk2" + (" best" if p.get("best") else (" top" if p.get("top") else ""))
         tag = '<span class="tg">%s</span>' % p["best"] if p.get("best") else ('<span class="tg top">%s</span>' % p["top"] if p.get("top") else "")
         link, bcls, label = shop(p["id"]), ("btn-p" if p.get("best") else "btn-g"), "%s %s" % (p["name"], cta_text)
-        btn = ('<a class="btn %s" href="%s" target="_blank" rel="noopener" data-pack="%s">%s</a>' % (bcls, esc(link), p["id"], label)) if link else \
-              ('<a class="btn %s" href="/#buy-%s">%s</a>' % (bcls, p["id"], label))
+        # 2026.11.25 18:21 대표 'AIMarker · 카피휴먼처럼 누르면 다시 고르는 충전 창(성균관컨설팅 운영 · 안전결제 안내)을 먼저': 충전 창으로.
+        # 도구가 있는 쪽은 humanize.js [data-buy] 가 그 자리에서 창, 요금 쪽 등은 첫 화면 #buy-칸 으로 가서 창. 예전(바로 결제 페이지 새 창) 줄은 아래 주석
+        # btn = ('<a class="btn %s" href="%s" target="_blank" rel="noopener" data-pack="%s">%s</a>' % (bcls, esc(link), p["id"], label)) if link else \
+        # ('<a class="btn %s" href="/#buy-%s">%s</a>' % (bcls, p["id"], label))
+        btn = '<a class="btn %s" href="/#buy-%s" data-buy="%s" data-pack="%s">%s</a>' % (bcls, p["id"], p["id"], p["id"], label)
         sv = save_badge(p)
         out.append('<div class="%s rv">%s<h3>%s</h3><p class="who">%s</p><p class="tk2"><b>%s</b>토큰</p><p class="pr2"><b>%s</b>%s<span>토큰당 %s · 부가세 포함</span></p>%s'
                    '<p class="use">%s 검사와 휴머나이징 서비스 <b>%s</b></p>%s</div>' % (
