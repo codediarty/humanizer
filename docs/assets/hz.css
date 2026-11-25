@@ -753,3 +753,5 @@ html.hz42-on,html.hz42-on body{overflow:hidden}
 @media (max-width:1080px){.hx-rose{left:auto;right:-420px;top:-420px;margin:0;width:980px;height:980px;opacity:.2}.hx-rose.b{opacity:.09}}
 @media (max-width:760px){.hx-rose{right:-330px;top:-300px;width:680px;height:680px;opacity:.18}.hx-rose.b{opacity:.08}.hx-lux::before{right:-260px;top:-300px;width:640px;height:640px}}
 @media (prefers-reduced-motion:reduce){.hx-rose,.hx-sheen{animation:none}.hx-sheen{display:none}}
+/* 2026.11.25 새 검색 쪽: 표 아래 작은 안내(설명을 위해 만든 예 · 상표 등) */
+.prose .measured{font-size:13px;line-height:1.6;color:var(--ink-3);margin:8px 0 0}
