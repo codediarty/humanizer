@@ -778,3 +778,8 @@ html.hz42-on,html.hz42-on body{overflow:hidden}
 @media (max-width:1080px){.hx-orbit{left:auto;right:-300px;top:-250px;margin:0;width:640px;height:640px}.hx-dots{-webkit-mask-image:radial-gradient(ellipse 55% 22% at 88% 4%,#000 15%,transparent 72%);mask-image:radial-gradient(ellipse 55% 22% at 88% 4%,#000 15%,transparent 72%)}}
 @media (max-width:760px){.hx-orbit{right:-250px;top:-225px;width:500px;height:500px}}
 @media (prefers-reduced-motion:reduce){.hx-orbit .o1,.hx-orbit .o2,.hx-orbit .spk{animation:none}}
+
+/* 13.43(2026.11.25 밤) 토큰 코드가 있는 손님(html.am-tok-on): 머리의 남은 토큰 칸 때문에 좁은 화면에서 메뉴 단추가 화면 밖으로 밀리던 것을 고침.
+   960px 아래는 토큰 칸의 '남은' 을 줄이고, 520px 아래는 머리의 '무료 검사' 단추를 접음(같은 단추는 아래 고정 줄 · 도구 칸에 그대로). 코드가 없는 손님 화면은 그대로 */
+@media (max-width: 960px) { html.am-tok-on .am-tok .am-tok-p { display: none; } }
+@media (max-width: 520px) { html.am-tok-on .hd-r > a.btn-p[data-tool] { display: none; } }
